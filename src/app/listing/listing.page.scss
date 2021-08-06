@@ -1,3 +1,7 @@
+.ccard{
+	border-radius: 10px;
+}
+
 table {
   color: var(--tc3);
 }
@@ -13,11 +17,44 @@ table tr td {
   padding: 10px 15px;
   border-bottom: 1px solid #ccc;
   text-align: left;
+  width: 40%;
+}
+
+table tr th:nth-child(1),
+table tr td:nth-child(1){
+	/*padding-right: 0;*/
+  width: 25%;
+}
+
+table tr th:nth-child(2),
+table tr td:nth-child(2){
+  width: 50%;
+}
+
+table tr th:nth-child(3),
+table tr td:nth-child(3){
+	text-align: right;
+	padding-left: 0;
+  width: 25%;
 }
 
 .cform-group{
 	/*padding-left: 0;*/
 	margin: 0 !important;
+}
+
+.item_search{
+	padding: 0;
+	
+	ion-item{
+		--background: #f2f2f2;
+		--padding-start: 20px;	
+		--padding-end: 20px;	
+
+		ion-label{
+			/*font-weight: bold !important;*/
+		}
+	}
 }
 
 .sidemenu{

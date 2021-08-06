@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ListingPageRoutingModule } from './listing-routing.module';
 import { ListingPage } from './listing.page';
-import { DataTableDirective } from './angular-datatables.directive';
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { DataTableDirective } from './angular-datatables.directive';
     IonicModule,
     ListingPageRoutingModule,
     HttpClientModule,
-    DataTableDirective,
+    DataTablesModule
   ],
   declarations: [ListingPage]
 })

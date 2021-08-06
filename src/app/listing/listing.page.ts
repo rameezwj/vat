@@ -19,7 +19,6 @@ export class ListingPage implements OnInit {
 
 	customers: any = [];
 	frmVatUpdate: FormGroup;
-  dtOptions: DataTables.Settings = {};
 
   constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService) {
 
@@ -39,14 +38,10 @@ export class ListingPage implements OnInit {
 		// this.customers = dummy;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   	this.initFrmVatUpdate();
-
-    this.dtOptions = {
-      pagingType: 'full_numbers'
-    };
   }
-
+  
   initFrmVatUpdate= ()=> {
     this.frmVatUpdate = this.formBuilder.group({
       vat: ['', Validators.required ],

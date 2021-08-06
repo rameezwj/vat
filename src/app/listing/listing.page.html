@@ -1,18 +1,15 @@
 <ion-content>
+	<div class="bctc1 df fdc jcfs aifs" style="padding: 0 0 10px 50px; margin-bottom: 0;">
+	  <img src="../assets/logo-white.png" class="db" style="max-width: 250px;" />
+	</div>
+
   <div class="df aic jcc" style="ddisplay: none !important;">
     <div class="listing_wrapper mx-auto" style="width: 90%; height: 100%;">
 
     	<div>
 				<form [formGroup]="frmVatUpdate">
-					<div class="widthb100 df fww jcsb ccard pt0 tl0 pb1 pr0 my2">
-						<div class="cform-group widthb100 dib mt1">
-						  <ion-item>
-						    <ion-label position="">Search by Customer#</ion-label>
-						    <ion-input type="text"></ion-input>
-						  </ion-item>
-						</div>
-
-	  				<div class="cform-group widthb33 dib">
+					<div class="widthb100 df fww jcsb ccard pt0 tl0 pb1 pr0 mt2 mb1">
+						<div class="cform-group widthb33 dib">
 	  				  <ion-item>
 	  				    <ion-label position="">VAT</ion-label>
 	  				    <ion-input type="text" formControlName="vat"></ion-input>
@@ -57,107 +54,110 @@
 				</form>
 			</div>
 
-			<div class="ccard">
+			<div class="ccard mb2 ofh">
 				<!-- <h1> Customer Number </h1> -->
-				<div class="p1">
-					<!-- <table>
-						<tr>
-							<th> Customer Number </th>
-							<th> Customer Name </th>
-							<th> اسم الزبون  </th>
-						</tr>
-						<tr *ngFor="let customer of customers">
-							<td>
-								<span>
-									{{customer.customer_number}}
-								</span>
-							</td>
-
-							<td>
-								<span>
-									{{customer.customer_name}}
-								</span>
-							</td>
-
-							<td>
-								<span>
-									{{customer.customer_name_ar}}
-								</span>
-							</td>
-						</tr>
-					</table> -->
-
-					<table datatable [dtOptions]="dtOptions" class="row-border hover">
-					  <thead>
-					    <tr>
-					      <th>ID</th>
-					      <th>First name</th>
-					      <th>Last name</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr>
-					      <td>1</td>
-					      <td>Foo</td>
-					      <td>Bar</td>
-					    </tr>
-					    <tr>
-					      <td>2</td>
-					      <td>Someone</td>
-					      <td>Youknow</td>
-					    </tr>
-					    <tr>
-					      <td>3</td>
-					      <td>Iamout</td>
-					      <td>Ofinspiration</td>
-					    </tr>
-					    <tr>
-					      <td>4</td>
-					      <td>Yoda</td>
-					      <td>Skywalker</td>
-					    </tr>
-					    <tr>
-					      <td>5</td>
-					      <td>Patrick</td>
-					      <td>Dupont</td>
-					    </tr>
-					    <tr>
-					      <td>6</td>
-					      <td>Barack</td>
-					      <td>Obama</td>
-					    </tr>
-					    <tr>
-					      <td>7</td>
-					      <td>François</td>
-					      <td>Holland</td>
-					    </tr>
-					    <tr>
-					      <td>8</td>
-					      <td>Michel</td>
-					      <td>Popo</td>
-					    </tr>
-					    <tr>
-					      <td>9</td>
-					      <td>Chuck</td>
-					      <td>Norris</td>
-					    </tr>
-					    <tr>
-					      <td>10</td>
-					      <td>Simon</td>
-					      <td>Robin</td>
-					    </tr>
-					    <tr>
-					      <td>11</td>
-					      <td>Louis</td>
-					      <td>Lin</td>
-					    </tr>
-					    <tr>
-					      <td>12</td>
-					      <td>Zelda</td>
-					      <td>Link</td>
-					    </tr>
-					  </tbody>
+				<div class="p1 widthb40 fl">
+					<div class="cform-group widthb100 dib item_search">
+					  <ion-item>
+					    <ion-label position="floating">Search by Customer#</ion-label>
+					    <ion-input type="text"></ion-input>
+					  </ion-item>
+					</div>
+					<table class="widthb100">
+						<thead>
+							<tr>
+								<th> Cust. Number </th>
+								<th> Cust. Name </th>
+								<th> اسم الزبون  </th>
+							</tr>
+						</thead>
 					</table>
+
+					<div  class="widthb100" style="height: 300px; overflow: auto;">
+						<table class="widthb100 table-striped">
+							<!-- <thead>
+								<tr>
+									<th> Customer Number </th>
+									<th> Customer Name </th>
+									<th> اسم الزبون  </th>
+								</tr>
+							</thead> -->
+							<tbody>
+								<tr *ngFor="let customer of customers">
+									<td>
+										<span>
+											{{customer.customer_number}}
+										</span>
+									</td>
+
+									<td>
+										<span>
+											{{customer.customer_name}}
+										</span>
+									</td>
+
+									<td>
+										<span>
+											{{customer.customer_name_ar}}
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="p1 widthb30 fl">
+					<ion-slides pager>
+					  <ion-slide>
+					  	<div>
+								<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
+					  	</div>
+					  </ion-slide>
+				    <ion-slide>
+				    	<div>
+				  			<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
+				    	</div>
+				    </ion-slide>
+			      <ion-slide>
+			      	<div>
+			    			<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
+			      	</div>
+			      </ion-slide>
+					</ion-slides>
+				</div>
+
+				<div class="p1 widthb30 fl">
+					<table class="" style="width: 100%; border-collapse: collapse;">
+						<tr>
+							<td> <b class="tc1">Classification</b> </td>
+							<td> Key Account </td>
+						</tr>
+						<tr>
+							<td> <b class="tc1">Region</b> </td>
+							<td> WEST </td>
+						</tr>
+						<tr>
+							<td> <b class="tc1">City</b> </td>
+							<td> Jeddah </td>
+						</tr>
+						<tr>
+							<td> <b class="tc1">Sales Rep. #</b> </td>
+							<td> 1234561 </td>
+						</tr>
+						<tr>
+							<td> <b class="tc1">City</b> </td>
+							<td> Jeddah </td>
+						</tr>
+						<tr>
+							<td> <b class="tc1">Classification</b> </td>
+							<td> Key Account </td>
+						</tr>
+					</table>
+					<div class="widthb100 df jcfe aic" style="margin-top: 30px;" (click)="frmVatSubmit()">
+					  <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Update </span>
+					  <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
+					</div>
 				</div>
 			</div>
     	
