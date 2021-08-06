@@ -83,7 +83,7 @@
 								</tr>
 							</thead> -->
 							<tbody>
-								<tr *ngFor="let customer of customers">
+								<tr *ngFor="let customer of customers" (click)="fetch_img(customer.customer_number)">
 									<td>
 										<span>
 											{{customer.customer_number}}

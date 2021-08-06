@@ -41,7 +41,7 @@ export class ListingPage implements OnInit {
   ngOnInit() {
   	this.initFrmVatUpdate();
   }
-  
+
   initFrmVatUpdate= ()=> {
     this.frmVatUpdate = this.formBuilder.group({
       vat: ['', Validators.required ],
@@ -57,5 +57,10 @@ export class ListingPage implements OnInit {
       address: ['', Validators.required ],
       file_address: ['', Validators.required ],*/
     });
+  }
+
+  fetch_img = (customer_number)=>{
+  	console.log(customer_number);
+  	// alert('sdsd')
   }
 }
