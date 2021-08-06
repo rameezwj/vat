@@ -1,0 +1,35 @@
+<div class="content_wrapper df fdc jcsb heightb100">
+	<div class="bctc1 df fdc jcc aic" style="display: none !important; border-radius: 0 0 50px 50px; padding: 0 0 20px 0; margin-bottom: 50px;">
+		<img src="../assets/logo-white.png" class="db" style="max-width: 320px;" />
+	</div>
+
+  <div class="hm_wrapper df fdc mx-auto" style="max-width: 320px; padding: 0 20px;">
+    
+		<!-- <img src="../assets/logo-white.png" class="db" /> -->
+
+		<form [formGroup]="frmLogin">
+	    <div class="cform-group widthb100">
+	      <ion-item>
+	        <ion-label position="floating">Username</ion-label>
+	        <ion-input type="text" formControlName="username"></ion-input>
+	      </ion-item>
+	    </div>
+
+	    <div class="cform-group widthb100">
+	      <ion-item>
+	        <ion-label position="floating">Password</ion-label>
+	        <ion-input type="text" formControlName="password"></ion-input>
+	      </ion-item>
+	    </div>
+
+	  	<div class="widthb100 df jcse aic" style="margin-top: 50px;" (click)="frmLoginSubmit()">
+	      <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Sign in </span>
+	      <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1);"></ion-icon>
+	  	</div>
+		</form>
+  </div>
+
+	<p style="display: none !important; width: 100%; padding: 20px 25px; font-size: 13px; line-height: 16px; color: #fff; margin-top: 20px; background: var(--tc1); border-radius: 50px 50px 0 0; text-align: center;">
+		Tagline about the app will go here.
+	</p>
+</div>

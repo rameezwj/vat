@@ -1,0 +1,110 @@
+<ion-content>
+  <div class="bctc1 df fdc jcc aic" style="display: none !important; border-radius: 0 0 50px 50px; padding: 0 0 20px 0; margin-bottom: 20px;">
+    <img src="../assets/logo-white.png" class="db" style="max-width: 320px;" />
+  </div>
+
+  <div class="df aic jcc">
+    <div class="hm_wrapper" style="max-width: 320px;">
+      <form [formGroup]="frmVat">
+         
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">Customer #</ion-label>
+            <ionic-selectable
+              formControlName="customer_number"
+              item-content
+              [items]="customers"
+              itemValueField="cus_id"
+              itemTextField="cus_number"
+              [canSearch]="true">
+
+              <ng-template ionicSelectableCloseButtonTemplate>
+                <ion-icon name="close-circle" class="closebtn ion-select-close"></ion-icon>
+              </ng-template>
+            </ionic-selectable>
+          </ion-item>
+        </div>
+
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">VAT</ion-label>
+            <ion-input type="text" formControlName="vat"></ion-input>
+          </ion-item>
+
+          <div>
+            <ion-input type="file" name="file_vat" formControlName="file_vat" (change)="onFileChange($event)"></ion-input>
+            <ion-icon name="camera"></ion-icon>
+          </div>
+        </div>
+
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">Main CR #</ion-label>
+            <ion-input type="text" formControlName="maincr"></ion-input>
+          </ion-item>
+
+          <div>
+            <ion-input type="file" name="file_maincr" formControlName="file_maincr" (change)="onFileChange($event)"></ion-input>
+            <ion-icon name="camera"></ion-icon>
+          </div>
+        </div>
+
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">Branch CR #</ion-label>
+            <ion-input type="text" formControlName="branchcr"></ion-input>
+          </ion-item>
+
+          <div>
+            <ion-input type="file" name="file_branchcr" formControlName="file_branchcr" (change)="onFileChange($event)"></ion-input>
+            <ion-icon name="camera"></ion-icon>
+          </div>
+        </div>
+
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">COC #</ion-label>
+            <ion-input type="text" formControlName="coc"></ion-input>
+          </ion-item>
+
+          <div>
+            <ion-input type="file" name="file_coc" formControlName="file_coc" (change)="onFileChange($event)"></ion-input>
+            <ion-icon name="camera"></ion-icon>
+          </div>
+        </div>
+
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">Baldiya #</ion-label>
+            <ion-input type="text" formControlName="baldiya"></ion-input>
+          </ion-item>
+
+          <div>
+            <ion-input type="file" name="file_baldiya" formControlName="file_baldiya" (change)="onFileChange($event)"></ion-input>
+            <ion-icon name="camera"></ion-icon>
+          </div>
+        </div>
+
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">National Address</ion-label>
+            <ion-input type="text" formControlName="address"></ion-input>
+          </ion-item>
+
+          <div>
+            <ion-input type="file" name="file_address" formControlName="file_address" (change)="onFileChange($event)"></ion-input>
+            <ion-icon name="camera"></ion-icon>
+          </div>
+        </div>
+
+        <div class="widthb100 df jcfe aic" style="margin-top: 10px;" (click)="frmVatSubmit()">
+          <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Submit </span>
+          <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <p style="display: none !important; width: 100%; padding: 20px 25px; font-size: 13px; line-height: 16px; color: #fff; margin-top: 20px; background: var(--tc1); border-radius: 50px 50px 0 0; text-align: center;">
+  </p>
+</ion-content>
