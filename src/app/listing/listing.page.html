@@ -50,13 +50,39 @@
 	  				    <ion-input type="text" formControlName="address"></ion-input>
 	  				  </ion-item>
 	  				</div>
+
+	  				<!-- <div class="cust_info"> -->
+		  				<div class="cform-group widthb33 dib cust_info">
+	  				  	<span> <b> Division</b> {{customer_info.division}} </span>
+		  				</div>
+
+		  				<div class="cform-group widthb33 dib cust_info">
+	  				  	<span> <b> Classification</b> {{customer_info.classification}} </span>
+		  				</div>
+
+		  				<div class="cform-group widthb33 dib cust_info">
+	  				  	<span> <b> City</b> {{customer_info.city}} </span>
+		  				</div>
+
+		  				<div class="cform-group widthb33 dib cust_info">
+	  				  	<span> <b> Sales Rep. Name</b> {{customer_info.salesRepName}} </span>
+		  				</div>
+
+		  				<div class="cform-group widthb33 dib cust_info">
+	  				  	<span> <b> Sales Rep Number</b> {{customer_info.salesRepNumber}} </span>
+		  				</div>
+
+		  				<div class="cform-group widthb33 dib cust_info">
+	  				  	<span> <b> Agency Category</b> {{customer_info.agencyCat}} </span>
+		  				</div>
+		  			<!-- </div> -->
 					</div>
 				</form>
 			</div>
 
 			<div class="ccard mb2 ofh">
 				<!-- <h1> Customer Number </h1> -->
-				<div class="p1 widthb40 fl">
+				<div class="p1 widthb60 fl">
 					<div class="cform-group widthb100 dib item_search">
 					  <ion-item>
 					    <ion-label position="floating">Search by Customer#</ion-label>
@@ -83,7 +109,7 @@
 								</tr>
 							</thead> -->
 							<tbody>
-								<tr *ngFor="let customer of customers_raw" (click)="fetch_img(customer.CUST_NUMBER)">
+								<tr *ngFor="let customer of customers_raw" (click)="fetchSelectedCustomer(customer.CUST_NUMBER)">
 									<td>
 										<span>
 											{{customer.CUST_NUMBER}}
@@ -107,7 +133,7 @@
 					</div>
 				</div>
 
-				<div class="p1 widthb30 fl">
+				<div class="p1 widthb40 fl">
 					<ion-slides pager>
 					  <ion-slide>
 					  	<div>
@@ -145,9 +171,14 @@
             	</div>
             </ion-slide>
 					</ion-slides>
+
+					<div class="widthb100 df jcfe aic" style="margin-top: 30px;" (click)="frmVatUpdateSubmit()">
+					  <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Update </span>
+					  <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
+					</div>
 				</div>
 
-				<div class="p1 widthb30 fl">
+				<!-- <div class="p1 widthb30 fl">
 					<table class="" style="width: 100%; border-collapse: collapse;">
 						<tr>
 							<td> <b class="tc1">Classification</b> </td>
@@ -178,100 +209,8 @@
 					  <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Update </span>
 					  <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
 					</div>
-				</div>
+				</div> -->
 			</div>
-    	
-    	<div class="relative ofh widthb100">
-    		<!-- <div class="relative widthb20 fixed sidemenu" style="ddisplay: none;">
-    			<img src="../assets/logo-white.png" class="db" style="max-height: 130px; background: #108d8e; padding: 10px 0 20px 0;" />
-    			<div style="position: absolutee; bottom: 0; width: 100%; overflow: auto; height: calc( 100vh - 130px );">
-
-    				<a *ngFor="let customer of customers">
-    					{{customer.customer_name}} ( {{customer.customer_number}} )
-    				</a>
-    			</div>
-    		</div>
-
-    		<div class="widthb80 heightb100 fr" style="ddisplay: none; background: transparent;">
-
-    			<div class="cform-group widthb100 dib mt1">
-    			  <ion-item>
-    			    <ion-label position="floating">Search by Customer#</ion-label>
-    			    <ion-input type="text"></ion-input>
-    			  </ion-item>
-    			</div>
-
-    			<div class="mt2" style="display: grid; grid-template-columns: 50% 50%;">
-    				<div class="relative ofh">
-    					<ion-slides pager>
-    					  <ion-slide>
-    					  	<div>
-    								<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
-    					  	</div>
-    					  </ion-slide>
-  					    <ion-slide>
-  					    	<div>
-  					  			<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
-  					    	</div>
-  					    </ion-slide>
-					      <ion-slide>
-					      	<div>
-					    			<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
-					      	</div>
-					      </ion-slide>
-    					</ion-slides>
-    				</div>
-	    			<div class="" style="background: #f2f2f2; padding: 20px;">
-	    				<table style="width: 100%; border-collapse: collapse;">
-	    					<tr>
-	    						<td>
-	    							<b class="tc1">Customer Name</b>
-	    						</td>
-	    						<td>
-	    							Sami Super Stores
-	    						</td>
-	    					</tr>
-	    					<tr>
-	    						<td>
-	    							<b class="tc1">Customer Number</b>
-	    						</td>
-	    						<td>
-	    							12358
-	    						</td>
-	    					</tr>
-	    					<tr>
-	    						<td>
-	    							<b class="tc1">Classification</b>
-	    						</td>
-	    						<td>
-	    							Key Account
-	    						</td>
-	    					</tr>
-	    					<tr>
-	    						<td>
-	    							<b class="tc1">Region</b>
-	    						</td>
-	    						<td>
-	    							WEST
-	    						</td>
-	    					</tr>
-	    					<tr>
-	    						<td>
-	    							<b class="tc1">City</b>
-	    						</td>
-	    						<td>
-	    							Jeddah
-	    						</td>
-	    					</tr>
-	    				</table>
-	    				<div class="widthb100 df jcfe aic" style="margin-top: 30px;" (click)="frmVatSubmit()">
-	    				  <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Update </span>
-	    				  <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
-	    				</div>
-	    			</div>
-    			</div>
-    		</div> -->
-    	</div>
     </div>
   </div>
 </ion-content>

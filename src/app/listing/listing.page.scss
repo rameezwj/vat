@@ -17,7 +17,7 @@ table tr td {
   padding: 10px 15px;
   border-bottom: 1px solid #ccc;
   text-align: left;
-  width: 40%;
+  /*width: 40%;*/
 }
 
 table tr th:nth-child(1),
@@ -28,14 +28,21 @@ table tr td:nth-child(1){
 
 table tr th:nth-child(2),
 table tr td:nth-child(2){
-  width: 50%;
+  /*width: 50%;*/
 }
 
 table tr th:nth-child(3),
 table tr td:nth-child(3){
-	text-align: right;
-	padding-left: 0;
-  width: 25%;
+	/*text-align: right;*/
+	/*padding-left: 0;*/
+  /*width: 25%;*/
+}
+
+table tr th:nth-child(4),
+table tr td:nth-child(4){
+	/*text-align: right;*/
+	/*padding-left: 0;*/
+  /*width: 25%;*/
 }
 
 .cform-group{
@@ -152,4 +159,42 @@ ion-slides{
 .swiper-pagination-custom,
 .swiper-container-horizontal>.swiper-pagination-bullets {
   bottom: 25px !important;
+}
+
+.cust_info{
+	/*position: relative;
+	display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  justify-content: space-between;
+
+  &> div{
+  	padding: 1vw;
+  }
+
+  &> div:nth-child(1),
+  &> div:nth-child(2),
+  &> div:nth-child(3){
+  	border-bottom: 1px solid #ccc;
+  }*/
+
+  position: relative;
+
+	span{
+		display: block;
+		width: 100%;
+		color: var(--tc3);
+		padding-top: .5vw;
+		padding-bottom: .5vw;
+		border-bottom: 1px solid #ccc;
+		font-size: 13px;
+	}
+
+}
+.cust_info:nth-child(1),
+.cust_info:nth-child(2),
+.cust_info:nth-child(3){
+	display: none;
+	span{
+	}
 }
