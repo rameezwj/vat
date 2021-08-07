@@ -19,35 +19,35 @@
 	  				<div class="cform-group widthb33 dib">
 	  				  <ion-item>
 	  				    <ion-label position="">Main CR #</ion-label>
-	  				    <ion-input type="text" fformControlName="maincr"></ion-input>
+	  				    <ion-input type="text" formControlName="maincr"></ion-input>
 	  				  </ion-item>
 	  				</div>
 
 	  				<div class="cform-group widthb33 dib">
 	  				  <ion-item>
 	  				    <ion-label position="">Branch CR #</ion-label>
-	  				    <ion-input type="text" fformControlName="branchcr"></ion-input>
+	  				    <ion-input type="text" formControlName="branchcr"></ion-input>
 	  				  </ion-item>
 	  				</div>
 
 	  				<div class="cform-group widthb33 dib">
 	  				  <ion-item>
 	  				    <ion-label position="">COC #</ion-label>
-	  				    <ion-input type="text" fformControlName="coc"></ion-input>
+	  				    <ion-input type="text" formControlName="coc"></ion-input>
 	  				  </ion-item>
 	  				</div>
 
 	  				<div class="cform-group widthb33 dib">
 	  				  <ion-item>
 	  				    <ion-label position="">Baldiya #</ion-label>
-	  				    <ion-input type="text" fformControlName="baldiya"></ion-input>
+	  				    <ion-input type="text" formControlName="baldiya"></ion-input>
 	  				  </ion-item>
 	  				</div>
 
 	  				<div class="cform-group widthb33 dib">
 	  				  <ion-item>
 	  				    <ion-label position="">National Address</ion-label>
-	  				    <ion-input type="text" fformControlName="address"></ion-input>
+	  				    <ion-input type="text" formControlName="address"></ion-input>
 	  				  </ion-item>
 	  				</div>
 					</div>
@@ -83,22 +83,22 @@
 								</tr>
 							</thead> -->
 							<tbody>
-								<tr *ngFor="let customer of customers" (click)="fetch_img(customer.customer_number)">
+								<tr *ngFor="let customer of customers_raw" (click)="fetch_img(customer.CUST_NUMBER)">
 									<td>
 										<span>
-											{{customer.customer_number}}
+											{{customer.CUST_NUMBER}}
 										</span>
 									</td>
 
 									<td>
 										<span>
-											{{customer.customer_name}}
+											{{customer.CUST_NAME}}
 										</span>
 									</td>
 
 									<td>
 										<span>
-											{{customer.customer_name_ar}}
+											{{customer.CUST_NAME_AR}}
 										</span>
 									</td>
 								</tr>
@@ -111,19 +111,39 @@
 					<ion-slides pager>
 					  <ion-slide>
 					  	<div>
-								<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
+					  		<img src="{{customer_info.images.BALADIYA_CERT_IMG}}" style="max-width: 100%;" />
 					  	</div>
 					  </ion-slide>
+				    
 				    <ion-slide>
 				    	<div>
-				  			<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
+				  			<img src="{{customer_info.images.BR_CR_CERT_IMG}}" style="max-width: 100%;" />
 				    	</div>
 				    </ion-slide>
+			      
 			      <ion-slide>
 			      	<div>
-			    			<img src="https://id.nadra.gov.pk/wp-content/uploads/2019/01/CNIC_page_img-1.jpg" style="max-width: 100%;" />
+			    			<img src="{{customer_info.images.MAIN_CR_CERT_IMG}}" style="max-width: 100%;" />
 			      	</div>
 			      </ion-slide>
+		        
+		        <ion-slide>
+		        	<div>
+		      			<img src="{{customer_info.images.NATIONAL_ADD_IMG}}" style="max-width: 100%;" />
+		        	</div>
+		        </ion-slide>
+	          
+	          <ion-slide>
+	          	<div>
+	        			<img src="{{customer_info.images.VAT_CERT_IMG}}" style="max-width: 100%;" />
+	          	</div>
+	          </ion-slide>
+            
+            <ion-slide>
+            	<div>
+          			<img src="{{customer_info.images.COC_CERT_IMG}}" style="max-width: 100%;" />
+            	</div>
+            </ion-slide>
 					</ion-slides>
 				</div>
 
@@ -131,27 +151,27 @@
 					<table class="" style="width: 100%; border-collapse: collapse;">
 						<tr>
 							<td> <b class="tc1">Classification</b> </td>
-							<td> Key Account </td>
-						</tr>
-						<tr>
-							<td> <b class="tc1">Region</b> </td>
-							<td> WEST </td>
+							<td> {{customer_info.classficiation}} </td>
 						</tr>
 						<tr>
 							<td> <b class="tc1">City</b> </td>
-							<td> Jeddah </td>
+							<td> {{customer_info.city}} </td>
 						</tr>
 						<tr>
-							<td> <b class="tc1">Sales Rep. #</b> </td>
-							<td> 1234561 </td>
+							<td> <b class="tc1">Sales Rep. Name</b> </td>
+							<td> {{customer_info.salesRepName}} </td>
 						</tr>
 						<tr>
-							<td> <b class="tc1">City</b> </td>
-							<td> Jeddah </td>
+							<td> <b class="tc1">Sales Rep Number</b> </td>
+							<td> {{customer_info.salesRepNumber}} </td>
 						</tr>
 						<tr>
-							<td> <b class="tc1">Classification</b> </td>
-							<td> Key Account </td>
+							<td> <b class="tc1">Agency Category</b> </td>
+							<td> {{customer_info.agencyCat}} </td>
+						</tr>
+						<tr>
+							<td> <b class="tc1">Division</b> </td>
+							<td> {{customer_info.division}} </td>
 						</tr>
 					</table>
 					<div class="widthb100 df jcfe aic" style="margin-top: 30px;" (click)="frmVatSubmit()">
