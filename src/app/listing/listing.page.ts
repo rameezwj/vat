@@ -24,6 +24,7 @@ export class ListingPage implements OnInit {
 	selected_customer: any = '';
 	loggedInUser: any;
 	customers_raw: any;
+	customersFilterData: any;
 	customer_info: any = {
 		classification: 'N/A',
 		city: 'N/A',
@@ -41,6 +42,11 @@ export class ListingPage implements OnInit {
 		}
 	};
 
+	image_switcher = {
+		path: this.dmmy_img,
+		title: ''
+	}
+
 	frmVatUpdate: FormGroup;
 	
   constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService) {
@@ -55,6 +61,7 @@ export class ListingPage implements OnInit {
 			
 			if(res.status=='Success'){
 				this.customers_raw = res.data;
+				this.customersFilterData = res.data;
 			}
   	});
   }
@@ -177,6 +184,59 @@ export class ListingPage implements OnInit {
   	});
 
   	// console.log(payload);
+  }
+
+  changeImg = (image, image_title)=>{
+ 		console.log(image, image_title);
+   	switch(image) {
+  	  case 'baldiya':
+  	  	this.image_switcher.path =	this.customer_info.images.BALADIYA_CERT_IMG;
+  	  	this.image_switcher.title = image_title;
+  			break;
+
+  	  case 'branch_cr':
+  	  	this.image_switcher.path =	this.customer_info.images.BR_CR_CERT_IMG;
+  	  	this.image_switcher.title = image_title;
+  			break;
+  	  
+  	  case 'main_cr':
+  	  	this.image_switcher.path =	this.customer_info.images.MAIN_CR_CERT_IMG;
+  	  	this.image_switcher.title = image_title;
+  			break;
+  	  
+  	  case 'address':
+  	  	this.image_switcher.path =	this.customer_info.images.NATIONAL_ADD_IMG;
+  	  	this.image_switcher.title = image_title;
+  			break;
+  	  
+  	  case 'vat':
+  	  	this.image_switcher.path =	this.customer_info.images.VAT_CERT_IMG;
+  	  	this.image_switcher.title = image_title;
+				break;
+  			
+		  case 'coc':
+		  	this.image_switcher.path =	this.customer_info.images.COC_CERT_IMG;
+		  	this.image_switcher.title = image_title;
+				break;
+  	}
+  }
+
+  filterPackets = (searchString)=>{
+
+  	let searchStringLength = searchString.length;
+  	
+  	if(searchString==''){
+  		this.customersFilterData = this.customers_raw;
+  	}
+  	else{
+  		this.customersFilterData = this.customers_raw.filter((item)=>{
+  			if((`${item.CUST_NUMBER}`).toLowerCase().includes(searchString)){
+  				return item;
+  			}
+  		})
+  	}
+
+  	console.log(this.customersFilterData);
   }
 
   logout = ()=>{

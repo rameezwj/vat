@@ -88,7 +88,7 @@
 					<div class="cform-group widthb100 dib item_search">
 					  <ion-item>
 					    <ion-label position="floating">Search by Customer#</ion-label>
-					    <ion-input type="text"></ion-input>
+					    <ion-input type="text" (ionChange)="filterPackets($event.target.value)"></ion-input>
 					  </ion-item>
 					</div>
 					<table class="widthb100">
@@ -111,7 +111,7 @@
 								</tr>
 							</thead> -->
 							<tbody>
-								<tr *ngFor="let customer of customers_raw" (click)="fetchSelectedCustomer(customer.CUST_NUMBER)">
+								<tr *ngFor="let customer of customersFilterData" (click)="fetchSelectedCustomer(customer.CUST_NUMBER)">
 									<td>
 										<span>
 											{{customer.CUST_NUMBER}}
@@ -136,7 +136,7 @@
 				</div>
 
 				<div class="p1 fl" style="width: 450px">
-					<ion-slides pager class="listing_slider">
+					<!-- <ion-slides pager class="listing_slider">
 					  <ion-slide>
 					  	<div>
 					  		<img src="{{customer_info.images.BALADIYA_CERT_IMG}}" style="max-width: 100%;" />
@@ -178,8 +178,23 @@
             	</div>
 					  	<p>COC Certificate</p>
             </ion-slide>
-					</ion-slides>
+					</ion-slides> -->
 
+					<div class="widthb100 listing_imgs">
+						<div>
+							<img src="{{image_switcher.path}}" style="width: 100%;" />
+						</div>
+						<p>{{image_switcher.title}}</p>
+
+						<div>
+							<i (click)="changeImg('baldiya', 'Baldiya Certificate')"><!-- 1 --></i>
+							<i (click)="changeImg('branch_cr', 'Branch Cr Certificate')"><!-- 2 --></i>
+							<i (click)="changeImg('main_cr', 'Main Cr Certificate')"><!-- 3 --></i>
+							<i (click)="changeImg('address', 'National Address')"><!-- 4 --></i>
+							<i (click)="changeImg('vat', 'VAT Certificate')"><!-- 5 --></i>
+							<i (click)="changeImg('coc', 'COC Certificate')"><!-- 6 --></i>
+						</div>
+					</div>
 					<div class="widthb100 df jcfe aic" style="margin-top: 30px;" (click)="frmVatUpdateSubmit()">
 					  <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Update </span>
 					  <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
