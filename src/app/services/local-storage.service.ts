@@ -18,4 +18,12 @@ export class LocalStorageService {
     setItem(keyName, val) {
         localStorage.setItem(keyName, JSON.stringify(val));
     }
+
+    logout() {
+        localStorage.removeItem('user_info');
+        localStorage.removeItem('status_login');
+        localStorage.removeItem('customers');
+        const loginRoute = `${window.location.protocol}//${window.location.host}/`;
+        window.location.href = loginRoute;
+    }
 }

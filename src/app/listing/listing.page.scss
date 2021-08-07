@@ -198,3 +198,22 @@ ion-slides{
 	span{
 	}
 }
+
+.listing_slider{
+	position: relative;
+
+	ion-slide{
+		flex-direction: column;
+
+		img{
+			display: block;
+		}
+		p{
+			margin-top: 10px;
+			display: block;
+			text-align: right;
+			font-size: 14px;
+			width: 100%;
+		}
+	}
+}

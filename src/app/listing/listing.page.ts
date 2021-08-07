@@ -56,9 +56,6 @@ export class ListingPage implements OnInit {
 			if(res.status=='Success'){
 				this.customers_raw = res.data;
 			}
-
-			// console.log(res);
-			// console.log(this.customers_raw);
   	});
   }
 
@@ -141,7 +138,7 @@ export class ListingPage implements OnInit {
   frmVatUpdateSubmit = ()=>{
 
   	if(this.selected_customer==''){
-  		alert('sdsds');
+  		this.NotificationService.alert('Alert', 'Please select a customer to update');
   		return false;
   	}
   	console.log(this.frmVatUpdate);
@@ -180,5 +177,9 @@ export class ListingPage implements OnInit {
   	});
 
   	// console.log(payload);
+  }
+
+  logout = ()=>{
+		this.localStorageService.logout();
   }
 }

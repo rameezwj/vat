@@ -28,9 +28,6 @@ export class HomePage {
 		console.log(this.loggedInUser);
 
 		this.getCustomers();
-		/*this.loggedInUser.map((i,v)=>{
-			this.customers.push({cus_id: i.CDC_CUS_ID, cus_number: i.CUST_NUMBER});
-		});*/
 	}
 
 	ngOnInit() {
@@ -42,44 +39,42 @@ export class HomePage {
 	}
 
   frmVatSubmit = ()=>{
-  	// console.log(this.frmVat.controls.customer_number.value, 'sdsds');
-  	console.log(this.frmVat.controls);
+  	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
+  	
+		if(this.frmVat.status!='VALID'){
+			this.NotificationService.alert('Alert', 'Please enter valid crendetials');
+			return false;
+		}
 
-  	if(this.frmVat.status!='VALID'){
-  		this.NotificationService.alert('Alert', 'Please enter valid crendetials');
-  		return false;
+  	const body = {
+  		P_USER_ID: this.loggedInUser.USER_ID,
+  		P_CUST_NUMBER: this.frmVat.value.customer_number.cus_id, 
+  		P_USER_TYPE: this.loggedInUser.USER_TYPE,
+  		P_LATITUDE: 'Null', 
+  		P_LONGITUDE: 'Null', 
+  		P_VAT_NUM: this.frmVat.value.vat,
+  		P_MAIN_CR_NUM: this.frmVat.value.maincr, 
+  		P_BR_CR_NUM: this.frmVat.value.branchcr,
+  		P_COC_NUM: this.frmVat.value.coc,
+  		P_BALADIYA_NUM: this.frmVat.value.baldiya,
+  		P_VAT_CERT_IMG: this.frmVat.value.file_vat,
+  		P_MAIN_CR_CERT_IMG: this.frmVat.value.file_maincr, 
+  		P_BR_CR_CERT_IMG: this.frmVat.value.file_branchcr,
+  		P_COC_CERT_IMG: this.frmVat.value.file_coc,
+  		P_BALADIYA_CERT_IMG: this.frmVat.value.file_baldiya, 
+  		P_NATIONAL_ADD_IMG: this.frmVat.value.file_address,
   	}
 
-  	return false;
+		this.NotificationService.presentLoading();;
 
-  	this.NotificationService.presentLoading();
-  	
-  	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
-		const body = {
-			customer_number: this.frmVat.value.customer_number.cus_id,
-			vat: this.frmVat.value.vat,
-			file_vat: this.frmVat.value.file_vat,
-			maincr: this.frmVat.value.maincr,
-			file_maincr: this.frmVat.value.file_maincr,
-			branchcr: this.frmVat.value.branchcr,
-			file_branchcr: this.frmVat.value.file_branchcr,
-			coc: this.frmVat.value.coc,
-			file_coc: this.frmVat.value.file_coc,
-			baldiya: this.frmVat.value.baldiya,
-			file_baldiya: this.frmVat.value.file_baldiya,
-			address: this.frmVat.value.address,
-			file_address: this.frmVat.value.file_address,
-		};
-		
-		// console.log(body);
-  	
-		this.http.post<any>('http://localhost:12123/update_vat', body).subscribe(res => {
-		   
-		   this.NotificationService.dismissLoading();
+  	this.http.post<any>('http://localhost:12123/updateVat', body).subscribe(res => {
 
-		   console.log(res);
-		});
-
+			this.NotificationService.dismissLoading()
+			
+			if(res.status=='Success'){
+				console.log(res)
+			}
+  	});
   }
 
 	initFrmVat= ()=> {
@@ -186,4 +181,8 @@ export class HomePage {
 		   }
 		});
 	}
+
+  logout = ()=>{
+		this.localStorageService.logout();
+  }
 }

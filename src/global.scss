@@ -2838,6 +2838,7 @@ body{
 	padding: 0 1vw;
 	display: inline-block;
 	margin-bottom: 10px;
+	background: #fff;
 
 	ion-label{
 		font-size: 15px !important;
@@ -2913,7 +2914,7 @@ ion-input[type='file'].ng-valid ~ ion-icon {
 }
 
 .swiper-pagination-bullet {
-  background: #fff;
+  background: #ccc;
   width: 12px !important;
   height: 12px !important;
   opacity: 1;
@@ -2927,5 +2928,6 @@ ion-input[type='file'].ng-valid ~ ion-icon {
 .swiper-pagination-fraction,
 .swiper-pagination-custom,
 .swiper-container-horizontal>.swiper-pagination-bullets {
-  bottom: 25px !important;
+  bottom: 0;
+  text-align: left;
 }

@@ -1,9 +1,11 @@
 <ion-content>
-	<div class="bctc1 df fdc jcfs aifs" style="padding: 0 0 10px 50px; margin-bottom: 0;">
+	<div class="bctc1 df jcsb aic" style="padding: 0 0 0 50px; margin-bottom: 0;">
 	  <img src="../assets/logo-white.png" class="db" style="max-width: 250px;" />
+
+	  <a (click)="logout()" class="tcw mr5"> Logout </a>
 	</div>
 
-  <div class="df aic jcc" style="ddisplay: none !important;">
+  <div class="df aic jcc">
     <div class="listing_wrapper mx-auto" style="width: 90%; height: 100%;">
 
     	<div>
@@ -82,7 +84,7 @@
 
 			<div class="ccard mb2 ofh">
 				<!-- <h1> Customer Number </h1> -->
-				<div class="p1 widthb60 fl">
+				<div class="p1 fl" style="width: calc( 100% - 450px );">
 					<div class="cform-group widthb100 dib item_search">
 					  <ion-item>
 					    <ion-label position="floating">Search by Customer#</ion-label>
@@ -133,42 +135,48 @@
 					</div>
 				</div>
 
-				<div class="p1 widthb40 fl">
-					<ion-slides pager>
+				<div class="p1 fl" style="width: 450px">
+					<ion-slides pager class="listing_slider">
 					  <ion-slide>
 					  	<div>
 					  		<img src="{{customer_info.images.BALADIYA_CERT_IMG}}" style="max-width: 100%;" />
 					  	</div>
+					  	<p>Baldiya Certificate</p>
 					  </ion-slide>
 				    
 				    <ion-slide>
 				    	<div>
 				  			<img src="{{customer_info.images.BR_CR_CERT_IMG}}" style="max-width: 100%;" />
 				    	</div>
+					  	<p>Branch Cr Certificate</p>
 				    </ion-slide>
 			      
 			      <ion-slide>
 			      	<div>
 			    			<img src="{{customer_info.images.MAIN_CR_CERT_IMG}}" style="max-width: 100%;" />
 			      	</div>
+					  	<p>Main Cr Certificate</p>
 			      </ion-slide>
 		        
 		        <ion-slide>
 		        	<div>
 		      			<img src="{{customer_info.images.NATIONAL_ADD_IMG}}" style="max-width: 100%;" />
 		        	</div>
+					  	<p>National Address Cr</p>	
 		        </ion-slide>
 	          
 	          <ion-slide>
 	          	<div>
 	        			<img src="{{customer_info.images.VAT_CERT_IMG}}" style="max-width: 100%;" />
 	          	</div>
+					  	<p>VAT Certificate</p>
 	          </ion-slide>
             
             <ion-slide>
             	<div>
           			<img src="{{customer_info.images.COC_CERT_IMG}}" style="max-width: 100%;" />
             	</div>
+					  	<p>COC Certificate</p>
             </ion-slide>
 					</ion-slides>
 
@@ -177,39 +185,6 @@
 					  <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
 					</div>
 				</div>
-
-				<!-- <div class="p1 widthb30 fl">
-					<table class="" style="width: 100%; border-collapse: collapse;">
-						<tr>
-							<td> <b class="tc1">Classification</b> </td>
-							<td> {{customer_info.classficiation}} </td>
-						</tr>
-						<tr>
-							<td> <b class="tc1">City</b> </td>
-							<td> {{customer_info.city}} </td>
-						</tr>
-						<tr>
-							<td> <b class="tc1">Sales Rep. Name</b> </td>
-							<td> {{customer_info.salesRepName}} </td>
-						</tr>
-						<tr>
-							<td> <b class="tc1">Sales Rep Number</b> </td>
-							<td> {{customer_info.salesRepNumber}} </td>
-						</tr>
-						<tr>
-							<td> <b class="tc1">Agency Category</b> </td>
-							<td> {{customer_info.agencyCat}} </td>
-						</tr>
-						<tr>
-							<td> <b class="tc1">Division</b> </td>
-							<td> {{customer_info.division}} </td>
-						</tr>
-					</table>
-					<div class="widthb100 df jcfe aic" style="margin-top: 30px;" (click)="frmVatSubmit()">
-					  <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Update </span>
-					  <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
-					</div>
-				</div> -->
 			</div>
     </div>
   </div>

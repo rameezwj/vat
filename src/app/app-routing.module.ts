@@ -20,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'listing',
-    loadChildren: () => import('./listing/listing.module').then( m => m.ListingPageModule)
+    loadChildren: () => import('./listing/listing.module').then( m => m.ListingPageModule),
+    canActivate: [AuthGuardService]
   },
 ];
 

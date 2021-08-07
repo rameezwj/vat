@@ -72,7 +72,14 @@ export class LoginPage implements OnInit {
         this.localStorageService.setItem('status_login', '1');
 		   	this.localStorageService.setItem('user_info', res.data);
 
-      	this.router.navigate(["/home"]);
+        let user_type = res.data.USER_TYPE;
+
+        if(user_type=='SALESPERSON'){
+          this.router.navigate(["/home"]);
+        }
+        else{
+        	this.router.navigate(["/listing"]);
+        }
 		   }
 		   else{
 		   	this.NotificationService.alert('Alert', 'Please enter valid crendetials');
