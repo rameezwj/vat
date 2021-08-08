@@ -41,13 +41,15 @@ export class HomePage {
   frmVatSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
   	
-		if(this.frmVat.status!='VALID'){
+		if(false){
+		// if(this.frmVat.status!='VALID'){
 			this.NotificationService.alert('Alert', 'Please enter valid crendetials');
 			return false;
 		}
 
   	const body = {
   		P_USER_ID: this.loggedInUser.USER_ID,
+  		// P_CUST_NUMBER: '123411', 
   		P_CUST_NUMBER: this.frmVat.value.customer_number.cus_id, 
   		P_USER_TYPE: this.loggedInUser.USER_TYPE,
   		P_LATITUDE: 'Null', 
@@ -65,14 +67,18 @@ export class HomePage {
   		P_NATIONAL_ADD_IMG: this.frmVat.value.file_address,
   	}
 
-		this.NotificationService.presentLoading();;
+  	console.log(body);
+
+  	// return false;
+		this.NotificationService.presentLoading();
 
   	this.http.post<any>('http://localhost:12123/updateVat', body).subscribe(res => {
 
-			this.NotificationService.dismissLoading()
+			this.NotificationService.dismissLoading();
 			
 			if(res.status=='Success'){
 				console.log(res)
+				this.NotificationService.alert('Alert', res.data);
 			}
   	});
   }
@@ -142,6 +148,12 @@ export class HomePage {
 						file_baldiya: data.base64
 					})
 			  	break;
+
+		    case 'file_address':
+		  		this.frmVat.patchValue({
+		  			file_baldiya: data.base64
+		  		})
+		    	break;
 			}
 		});
 	}
@@ -164,22 +176,27 @@ export class HomePage {
 
 	getCustomers = ()=>{
 		
-		const body = {userid: this.loggedInUser.USER_ID};
-		console.log(body)
-		this.http.post<any>('http://localhost:12123/getCustomers', body).subscribe(res => {
+		const body = {
+			USER_ID: this.loggedInUser.USER_ID
+		};
+		
+		this.http.post<any>('http://localhost:12123/getSalesCustomers', body).subscribe(res => {
 		   
-		   // this.NotificationService.dismissLoading();
-
-		   console.log(res, 'rsssssssss');
-
-		   if(res.status=='Success'){
-        this.localStorageService.setItem('customers', res.data);
+		   if(res.status=='Success' && res.data.length > 0){
+        this.localStorageService.setItem('sales_customers', res.data);
 
         res.data.map((i,v)=>{
         	this.customers.push({cus_id: i.CDC_CUS_ID, cus_number: i.CUST_NUMBER});
         });
 		   }
+		   else{
+		   	this.NotificationService.alert('Alert', 'No Customer found');
+		   }
 		});
+	}
+
+	selectCustomer = (e)=>{
+		console.log(e)
 	}
 
   logout = ()=>{

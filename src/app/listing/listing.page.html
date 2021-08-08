@@ -1,8 +1,10 @@
 <ion-content>
-	<div class="bctc1 df jcsb aic" style="padding: 0 0 0 50px; margin-bottom: 0;">
-	  <img src="../assets/logo-white.png" class="db" style="max-width: 250px;" />
+	<div class="bctc1 df jcsb aic app_header">
+	  <img src="../assets/logo-white.png" class="db" />
 
-	  <a (click)="logout()" class="tcw mr5"> Logout </a>
+	  <div>
+	  	<a (click)="logout()" class="tcw mr5"> {{loggedInUser.USER_TYPE}} <ion-icon name="log-out"></ion-icon> Logout </a>
+	  </div>
 	</div>
 
   <div class="df aic jcc">
@@ -11,6 +13,13 @@
     	<div>
 				<form [formGroup]="frmVatUpdate">
 					<div class="widthb100 df fww jcsb ccard pt0 tl0 pb1 pr0 mt2 mb1">
+						<div class="cform-group widthb33 dib">
+						  <ion-item>
+						    <ion-label position="">Customer Number</ion-label>
+						    <ion-input type="text" readonly value="{{selected_customer!='' ? selected_customer : 'N/A' }}"></ion-input>
+						  </ion-item>
+						</div>
+
 						<div class="cform-group widthb33 dib">
 	  				  <ion-item>
 	  				    <ion-label position="">VAT</ion-label>
@@ -46,36 +55,36 @@
 	  				  </ion-item>
 	  				</div>
 
-	  				<div class="cform-group widthb33 dib">
+	  				<!-- <div class="cform-group widthb33 dib">
 	  				  <ion-item>
-	  				    <ion-label position="">National Address</ion-label>
-	  				    <ion-input type="text" formControlName="address"></ion-input>
+	  				    <ion-label position="">Customer Number</ion-label>
+	  				    <ion-input type="text"></ion-input>
 	  				  </ion-item>
-	  				</div>
+	  				</div> -->
 
 	  				<!-- <div class="cust_info"> -->
 		  				<div class="cform-group widthb33 dib cust_info">
-	  				  	<span> <b> Division</b> {{customer_info.division}} </span>
+	  				  	<span> <b class="tc1"> Division</b>: {{customer_info.division}} </span>
 		  				</div>
 
 		  				<div class="cform-group widthb33 dib cust_info">
-	  				  	<span> <b> Classification</b> {{customer_info.classification}} </span>
+	  				  	<span> <b class="tc1"> Classification</b>: {{customer_info.classification}} </span>
 		  				</div>
 
 		  				<div class="cform-group widthb33 dib cust_info">
-	  				  	<span> <b> City</b> {{customer_info.city}} </span>
+	  				  	<span> <b class="tc1"> City</b>: {{customer_info.city}} </span>
 		  				</div>
 
 		  				<div class="cform-group widthb33 dib cust_info">
-	  				  	<span> <b> Sales Rep. Name</b> {{customer_info.salesRepName}} </span>
+	  				  	<span> <b class="tc1"> Sales Rep. Name</b>: {{customer_info.salesRepName}} </span>
 		  				</div>
 
 		  				<div class="cform-group widthb33 dib cust_info">
-	  				  	<span> <b> Sales Rep Number</b> {{customer_info.salesRepNumber}} </span>
+	  				  	<span> <b class="tc1"> Sales Rep Number</b>: {{customer_info.salesRepNumber}} </span>
 		  				</div>
 
 		  				<div class="cform-group widthb33 dib cust_info">
-	  				  	<span> <b> Agency Category</b> {{customer_info.agencyCat}} </span>
+	  				  	<span> <b class="tc1"> Agency Category</b>: {{customer_info.agencyCat}} </span>
 		  				</div>
 		  			<!-- </div> -->
 					</div>
@@ -84,7 +93,7 @@
 
 			<div class="ccard mb2 ofh">
 				<!-- <h1> Customer Number </h1> -->
-				<div class="p1 fl" style="width: calc( 100% - 450px );">
+				<div class="p1 fl" style="width: calc( 100% - 550px );">
 					<div class="cform-group widthb100 dib item_search">
 					  <ion-item>
 					    <ion-label position="floating">Search by Customer#</ion-label>
@@ -94,14 +103,14 @@
 					<table class="widthb100">
 						<thead>
 							<tr>
-								<th> Cust. Number </th>
-								<th> Cust. Name </th>
-								<th> اسم الزبون  </th>
+								<th class="widthb30"> Cust. Number </th>
+								<th class="widthb50"> Cust. Name </th>
+								<th class="widthb20 tar"> اسم الزبون  </th>
 							</tr>
 						</thead>
 					</table>
 
-					<div  class="widthb100" style="height: 300px; overflow: auto;">
+					<div  class="widthb100" style="height: 230px; overflow: auto;">
 						<table class="widthb100 table-striped">
 							<!-- <thead>
 								<tr>
@@ -112,19 +121,19 @@
 							</thead> -->
 							<tbody>
 								<tr *ngFor="let customer of customersFilterData" (click)="fetchSelectedCustomer(customer.CUST_NUMBER)">
-									<td>
+									<td class="widthb30">
 										<span>
 											{{customer.CUST_NUMBER}}
 										</span>
 									</td>
 
-									<td>
+									<td class="widthb50">
 										<span>
 											{{customer.CUST_NAME}}
 										</span>
 									</td>
 
-									<td>
+									<td class="widthb20 tar">
 										<span>
 											{{customer.CUST_NAME_AR}}
 										</span>
@@ -133,9 +142,14 @@
 							</tbody>
 						</table>
 					</div>
+
+					<div class="widthb100 df jcfe aic btn_primary" style="" (click)="frmVatUpdateSubmit()">
+					  <span> Update </span>
+					  <ion-icon name="chevron-forward-circle"></ion-icon>
+					</div>
 				</div>
 
-				<div class="p1 fl" style="width: 450px">
+				<div class="p1 fl" style="width: 550px">
 					<!-- <ion-slides pager class="listing_slider">
 					  <ion-slide>
 					  	<div>
@@ -182,22 +196,14 @@
 
 					<div class="widthb100 listing_imgs">
 						<div>
-							<img src="{{image_switcher.path}}" style="width: 100%;" />
+							<img [src]="sanitizer.bypassSecurityTrustResourceUrl(image_switcher.path)" style="width: 100%;" />
 						</div>
 						<p>{{image_switcher.title}}</p>
 
-						<div>
-							<i (click)="changeImg('baldiya', 'Baldiya Certificate')"><!-- 1 --></i>
-							<i (click)="changeImg('branch_cr', 'Branch Cr Certificate')"><!-- 2 --></i>
-							<i (click)="changeImg('main_cr', 'Main Cr Certificate')"><!-- 3 --></i>
-							<i (click)="changeImg('address', 'National Address')"><!-- 4 --></i>
-							<i (click)="changeImg('vat', 'VAT Certificate')"><!-- 5 --></i>
-							<i (click)="changeImg('coc', 'COC Certificate')"><!-- 6 --></i>
+						<div  *ngIf="selected_customer_images">
+							<a (click)="changeImgPrev()">Previous</a>
+							<a (click)="changeImgNext()">Next</a>
 						</div>
-					</div>
-					<div class="widthb100 df jcfe aic" style="margin-top: 30px;" (click)="frmVatUpdateSubmit()">
-					  <span style="font-size: 25px; font-weight: 700; color: var(--tc1);"> Update </span>
-					  <ion-icon name="chevron-forward-circle" style="font-size: 50px; color: var(--tc1); margin-left: 10px;"></ion-icon>
 					</div>
 				</div>
 			</div>

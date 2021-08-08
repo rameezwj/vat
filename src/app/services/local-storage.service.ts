@@ -22,7 +22,7 @@ export class LocalStorageService {
     logout() {
         localStorage.removeItem('user_info');
         localStorage.removeItem('status_login');
-        localStorage.removeItem('customers');
+        localStorage.removeItem('sales_customers');
         const loginRoute = `${window.location.protocol}//${window.location.host}/`;
         window.location.href = loginRoute;
     }
