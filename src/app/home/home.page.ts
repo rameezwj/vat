@@ -41,8 +41,8 @@ export class HomePage {
   frmVatSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
   	
-		if(false){
-		// if(this.frmVat.status!='VALID'){
+		// if(false){
+		if(this.frmVat.status!='VALID'){
 			this.NotificationService.alert('Alert', 'Please enter valid crendetials');
 			return false;
 		}
@@ -96,7 +96,7 @@ export class HomePage {
 	    file_coc: ['', Validators.required ],
 	    baldiya: ['', Validators.required ],
 	    file_baldiya: ['', Validators.required ],
-	    address: ['', Validators.required ],
+	    address: [''],
 	    file_address: ['', Validators.required ],
 	  });
 	}

@@ -25,15 +25,4 @@ export class AuthGuardService implements CanActivate {
       return true;
     }
   }
-
-  /*canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-    return new Promise((resolve, reject) => {
-
-    	setTimeout(()=>{
-	    	// this.router.navigate(["login"]);
-	  		resolve(true)
-    	}, 0)
-  	})
-  }*/
 }
