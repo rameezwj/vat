@@ -233,7 +233,7 @@ export class ListingPage implements OnInit {
 				console.log(res)
 				this.NotificationService.alert('Alert', res.data);
 
-				// this.getCustomers();
+				this.getCustomers();
 				this.resetFrmVatUpdate();
 			}
   	});

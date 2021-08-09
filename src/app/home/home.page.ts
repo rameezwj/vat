@@ -40,9 +40,10 @@ export class HomePage {
 
   frmVatSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
-  	
-		// if(false){
-		if(this.frmVat.status!='VALID'){
+  		
+  	console.log(this.frmVat, 'vat submit form');
+		if(false){
+		// if(this.frmVat.status!='VALID'){
 			this.NotificationService.alert('Alert', 'Please enter valid crendetials');
 			return false;
 		}
@@ -50,7 +51,7 @@ export class HomePage {
   	const body = {
   		P_USER_ID: this.loggedInUser.USER_ID,
   		// P_CUST_NUMBER: '123411', 
-  		P_CUST_NUMBER: this.frmVat.value.customer_number.cus_id, 
+  		P_CUST_NUMBER: this.frmVat.value.customer_number.cus_number, 
   		P_USER_TYPE: this.loggedInUser.USER_TYPE,
   		P_LATITUDE: 'Null', 
   		P_LONGITUDE: 'Null', 
@@ -180,14 +181,20 @@ export class HomePage {
 			USER_ID: this.loggedInUser.USER_ID
 		};
 		
+		this.NotificationService.presentLoading();
+		
 		this.http.post<any>('http://localhost:12123/getSalesCustomers', body).subscribe(res => {
 		   
+		   this.NotificationService.dismissLoading();
+
 		   if(res.status=='Success' && res.data.length > 0){
+        
         this.localStorageService.setItem('sales_customers', res.data);
 
         res.data.map((i,v)=>{
         	this.customers.push({cus_id: i.CDC_CUS_ID, cus_number: i.CUST_NUMBER});
         });
+        // console.log(this.customers, 'ssdsds');
 		   }
 		   else{
 		   	this.NotificationService.alert('Alert', 'No Customer found');
