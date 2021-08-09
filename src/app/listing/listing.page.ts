@@ -57,13 +57,20 @@ export class ListingPage implements OnInit {
 
   	this.loggedInUser = this.localStorageService.getItem('user_info');
 
+  	this.getCustomers();
+  }
+
+  ngOnInit() {
+  	this.initFrmVatUpdate();
+  }
+
+  getCustomers = ()=>{
   	const body = {
   		USER_ID: this.loggedInUser.USER_ID,
   		REGION: this.loggedInUser.USER_REGION
   	};
 
-  	console.log(body)
-		this.NotificationService.presentLoading();
+  	this.NotificationService.presentLoading();
 
   	this.http.post<any>('http://localhost:12123/getCustomers', body).subscribe(res => {
 
@@ -79,10 +86,6 @@ export class ListingPage implements OnInit {
   	});
   }
 
-  ngOnInit() {
-  	this.initFrmVatUpdate();
-  }
-
   initFrmVatUpdate= ()=> {
     this.frmVatUpdate = this.formBuilder.group({
       vat: ['N/A', Validators.required ],
@@ -93,6 +96,33 @@ export class ListingPage implements OnInit {
       // address: ['N/A', Validators.required ],
     });
   }
+
+  resetFrmVatUpdate = ()=>{
+  	this.frmVatUpdate.patchValue({
+  	  vat: 'N/A',
+  	  maincr: 'N/A',
+  	  branchcr: 'N/A',
+  	  coc: 'N/A',
+  	  baldiya: 'N/A',
+  	  // address: (custRow.CITY) ? custRow.CITY : 'N/A',
+  	});
+
+  	// reset selected customer
+  	this.selected_customer = '';
+  	this.selected_customer_images = false;
+
+  	// reset select customer images
+  	this.image_switcher.path = this.dummy_img;
+  	this.image_switcher.title = '';
+
+  	// reset select customer info
+		this.customer_info.classification = 'N/A';
+		this.customer_info.city = 'N/A';
+		this.customer_info.salesRepName = 'N/A';
+		this.customer_info.salesRepNumber = 'N/A';
+		this.customer_info.agencyCat = 'N/A';
+		this.customer_info.division = 'N/A';
+	}
 
   fetchSelectedCustomer = (customer_number)=>{
 
@@ -157,16 +187,6 @@ export class ListingPage implements OnInit {
 				this.customer_info.images.NATIONAL_ADD_IMG = this.dummy_img;
 				this.customer_info.images.VAT_CERT_IMG = this.dummy_img;
 			}
-
-			// console.log(res);
-			// console.log(this.customers_raw);
-
-			/*var image = new Image();
-			image.onload = function(){
-			   console.log(image.width); // image is loaded and we have image width 
-			}
-			image.src = res.data[0].BALADIYA_CERT_IMG;
-			document.body.appendChild(image);*/
   	});
   }
 
@@ -212,6 +232,9 @@ export class ListingPage implements OnInit {
 			if(res.status=='Success'){
 				console.log(res)
 				this.NotificationService.alert('Alert', res.data);
+
+				// this.getCustomers();
+				this.resetFrmVatUpdate();
 			}
   	});
   }
