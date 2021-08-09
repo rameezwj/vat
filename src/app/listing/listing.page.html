@@ -97,7 +97,7 @@
 					<div class="cform-group widthb100 dib item_search">
 					  <ion-item>
 					    <ion-label position="floating">Search by Customer#</ion-label>
-					    <ion-input type="text" (ionChange)="filterPackets($event.target.value)"></ion-input>
+					    <ion-input type="text" (ionChange)="filterPackets($any($event.target).value)"></ion-input>
 					  </ion-item>
 					</div>
 					<table class="widthb100">
@@ -141,6 +141,7 @@
 								</tr>
 							</tbody>
 						</table>
+						<p class="mt1 tc3" *ngIf="customers_found_status"> No customers found for updation. </p>
 					</div>
 
 					<div class="widthb100 df jcfe aic btn_primary" style="" (click)="frmVatUpdateSubmit()">

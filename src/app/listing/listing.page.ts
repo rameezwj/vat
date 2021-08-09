@@ -25,6 +25,7 @@ export class ListingPage implements OnInit {
 
 	selected_customer: any = '';
 	selected_customer_images: any = false;
+	customers_found_status = false;
 	loggedInUser: any;
 	customers_raw: any;
 	customersFilterData: any;
@@ -53,7 +54,7 @@ export class ListingPage implements OnInit {
 
 	frmVatUpdate: FormGroup;
 	
-  constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService, private sanitizer: DomSanitizer) {
+  constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService, public sanitizer: DomSanitizer) {
 
   	this.loggedInUser = this.localStorageService.getItem('user_info');
 
@@ -79,9 +80,12 @@ export class ListingPage implements OnInit {
 			if(res.status=='Success' && res.data.length > 0){
 				this.customers_raw = res.data;
 				this.customersFilterData = res.data;
+
+				this.customers_found_status = false;
 			}
 			else{
-				this.NotificationService.alert('Alert', 'No Customer found');
+				// this.NotificationService.alert('Alert', 'No Customer found');
+				this.customers_found_status = true;
 			}
   	});
   }
@@ -345,7 +349,7 @@ export class ListingPage implements OnInit {
   		})
   	}
 
-  	console.log(this.customersFilterData);
+  	// console.log(this.customersFilterData);
   }
 
   logout = ()=>{

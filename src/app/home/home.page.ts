@@ -41,9 +41,8 @@ export class HomePage {
   frmVatSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
   		
-  	console.log(this.frmVat, 'vat submit form');
-		if(false){
-		// if(this.frmVat.status!='VALID'){
+  	// if(false){
+		if(this.frmVat.status!='VALID'){
 			this.NotificationService.alert('Alert', 'Please enter valid crendetials');
 			return false;
 		}
@@ -79,6 +78,7 @@ export class HomePage {
 			
 			if(res.status=='Success'){
 				console.log(res)
+				this.resetfrmVat();
 				this.NotificationService.alert('Alert', res.data);
 			}
   	});
@@ -100,6 +100,24 @@ export class HomePage {
 	    address: [''],
 	    file_address: ['', Validators.required ],
 	  });
+	}
+
+  resetfrmVat = ()=>{
+  	this.frmVat.patchValue({
+  	  customer_number: '',
+  	  vat: '',
+  	  file_vat: '',
+  	  maincr: '',
+  	  file_maincr: '',
+  	  branchcr: '',
+  	  file_branchcr: '',
+  	  coc: '',
+  	  file_coc: '',
+  	  baldiya: '',
+  	  file_baldiya: '',
+  	  address: '',
+  	  file_address: '',
+  	});
 	}
 
 	onFileChange = (event)=> {
@@ -152,7 +170,7 @@ export class HomePage {
 
 		    case 'file_address':
 		  		this.frmVat.patchValue({
-		  			file_baldiya: data.base64
+		  			file_address: data.base64
 		  		})
 		    	break;
 			}
@@ -210,3 +228,5 @@ export class HomePage {
 		this.localStorageService.logout();
   }
 }
+
+1235414
