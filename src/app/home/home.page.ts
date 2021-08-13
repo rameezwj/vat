@@ -19,6 +19,10 @@ export class HomePage {
 	loggedInUser: any;
 	frmVat: FormGroup;
 	customers: any = [];
+	customer_info: any = {
+		customer_name: '',
+		customer_name_ar: ''
+	}
 	file_names: any = {'file_vat': '', 'file_maincr': '', 'file_branchcr': '', 'file_coc': '', 'file_baldiya': ''};
 
 	constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService) {
@@ -49,22 +53,23 @@ export class HomePage {
 
   	const body = {
   		P_USER_ID: this.loggedInUser.USER_ID,
-  		// P_CUST_NUMBER: '123411', 
   		P_CUST_NUMBER: this.frmVat.value.customer_number.cus_number, 
   		P_USER_TYPE: this.loggedInUser.USER_TYPE,
   		P_LATITUDE: 'Null', 
   		P_LONGITUDE: 'Null', 
   		P_VAT_NUM: this.frmVat.value.vat,
   		P_MAIN_CR_NUM: this.frmVat.value.maincr, 
-  		P_BR_CR_NUM: this.frmVat.value.branchcr,
+  		P_BR_CR_NUM: 'N/A',
   		P_COC_NUM: this.frmVat.value.coc,
   		P_BALADIYA_NUM: this.frmVat.value.baldiya,
   		P_VAT_CERT_IMG: this.frmVat.value.file_vat,
   		P_MAIN_CR_CERT_IMG: this.frmVat.value.file_maincr, 
-  		P_BR_CR_CERT_IMG: this.frmVat.value.file_branchcr,
+  		P_BR_CR_CERT_IMG: null,
   		P_COC_CERT_IMG: this.frmVat.value.file_coc,
   		P_BALADIYA_CERT_IMG: this.frmVat.value.file_baldiya, 
   		P_NATIONAL_ADD_IMG: this.frmVat.value.file_address,
+  		P_CUS_NAME: 'english',
+  		P_CUS_NAME_AR: 'arabic',
   	}
 
   	console.log(body);
@@ -91,13 +96,13 @@ export class HomePage {
 	    file_vat: ['', Validators.required ],
 	    maincr: ['', Validators.required ],
 	    file_maincr: ['', Validators.required ],
-	    branchcr: ['', Validators.required ],
-	    file_branchcr: ['', Validators.required ],
+	    /*branchcr: ['', valueidators.required ],
+	    file_branchcr: ['', Validators.required ],*/
 	    coc: ['', Validators.required ],
 	    file_coc: ['', Validators.required ],
 	    baldiya: ['', Validators.required ],
 	    file_baldiya: ['', Validators.required ],
-	    address: [''],
+	    // address: [''],
 	    file_address: ['', Validators.required ],
 	  });
 	}
@@ -109,15 +114,18 @@ export class HomePage {
   	  file_vat: '',
   	  maincr: '',
   	  file_maincr: '',
-  	  branchcr: '',
-  	  file_branchcr: '',
+  	  /*branchcr: '',
+  	  file_branchcr: '',*/
   	  coc: '',
   	  file_coc: '',
   	  baldiya: '',
   	  file_baldiya: '',
-  	  address: '',
+  	  // address: '',
   	  file_address: '',
   	});
+
+  	this.customer_info.customer_name = '';
+  	this.customer_info.customer_name_ar = '';
 	}
 
 	onFileChange = (event)=> {
@@ -210,7 +218,7 @@ export class HomePage {
         this.localStorageService.setItem('sales_customers', res.data);
 
         res.data.map((i,v)=>{
-        	this.customers.push({cus_id: i.CDC_CUS_ID, cus_number: i.CUST_NUMBER});
+        	this.customers.push({cus_id: i.CDC_CUS_ID, cus_number: i.CUST_NUMBER, cus_name: i.CUST_NAME, cus_name_ar: i.CUST_NAME_AR});
         });
         // console.log(this.customers, 'ssdsds');
 		   }
@@ -221,7 +229,9 @@ export class HomePage {
 	}
 
 	selectCustomer = (e)=>{
-		console.log(e)
+		console.log(e);
+		this.customer_info.customer_name = e.value.cus_name;
+		this.customer_info.customer_name_ar = e.value.cus_name_ar;
 	}
 
   logout = ()=>{

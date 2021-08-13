@@ -120,12 +120,16 @@ app.use(
     try {
         conn = await oracledb.getConnection(config1);
         console.log(conn, 'cn');
-        let query = `
-          SELECT * FROM 
+        /*let query = `
+          SELECT * FROM
           TBL_SYS_USER_LOGIN u,
           TBL_CUSTOMER_APP_DATA c
-          WHERE u.USER_ID='${USER_ID}' AND u.USER_ID = c.SALESREP_NUMBER AND u.USER_REGION = c.REGION AND SALES_SUBMITTED IS NULL`;
-  
+          WHERE u.USER_ID='${USER_ID}' AND u.USER_ID = c.SALESREP_NUMBER AND u.USER_REGION = c.REGION AND SALES_SUBMITTED IS NULL`;*/
+        
+        let query = `
+          SELECT * FROM
+          TBL_CUSTOMER_APP_DATA t WHERE T.SALESREP_NUMBER='${USER_ID}' AND T.SALES_SUBMITTED IS NULL`;
+
         const result = await conn.execute(query, [], {outFormat: oracledb.OUT_FORMAT_OBJECT})
 
         // console.log(query);
@@ -216,7 +220,7 @@ app.use(
     async function(req, res){
 
     let customerNumber = req.body.customerNumber;
-    console.log(req, 'ssssssssssssssssssss');
+    // console.log(req, 'ssssssssssssssssssss');
     try {
         conn = await oracledb.getConnection(config1)
 
@@ -237,7 +241,7 @@ app.use(
         let row;
         let temp = [];
         while ((row = await resultSet.getRow())) {
-          console.log(row);
+          // console.log(row);
           temp.push(row);
         }
 
@@ -285,6 +289,9 @@ app.use(
         COC_CERT_IMG = req.body.P_COC_CERT_IMG,
         BALADIYA_CERT_IMG = req.body.P_BALADIYA_CERT_IMG,
         NATIONAL_ADD_IMG = req.body.P_NATIONAL_ADD_IMG;
+        CUS_NAME = req.body.P_CUS_NAME;
+        CUS_NAME_AR = req.body.P_CUS_NAME_AR;
+        // CUS_NAME_AR = "sdsd";
 
     try {
         conn = await oracledb.getConnection(config1)
@@ -306,6 +313,8 @@ app.use(
           :P_COC_CERT_IMG,
           :P_BALADIYA_CERT_IMG,
           :P_NATIONAL_ADD_IMG,
+          :P_CUS_NAME,
+          :P_CUS_NAME_AR,
           :cursor
           );
 
@@ -330,6 +339,8 @@ app.use(
             P_COC_CERT_IMG: COC_CERT_IMG,
             P_BALADIYA_CERT_IMG: BALADIYA_CERT_IMG,
             P_NATIONAL_ADD_IMG: NATIONAL_ADD_IMG,
+            P_CUS_NAME: CUS_NAME,
+            P_CUS_NAME_AR: CUS_NAME_AR,
             cursor: { dir: oracledb.BIND_OUT, type: oracledb.STRING } , 
           },
           {outFormat: oracledb.OUT_FORMAT_OBJECT});
@@ -358,6 +369,13 @@ app.use(
       }
   });
 // insert/update vat
+
+app.get(
+  '/v',
+  function(req, res){
+    console.log('ran');
+    res.send('ran');
+});
 
 app.use(function(req, res, next){
   // res.status(404);

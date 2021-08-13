@@ -15,7 +15,7 @@ import { DataTablesModule } from "angular-datatables";
     IonicModule,
     ListingPageRoutingModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
   ],
   declarations: [ListingPage]
 })

@@ -6,6 +6,7 @@ import {DataService} from '../data.service';
 import {Observable, Subscriber} from 'rxjs';
 import {LocalStorageService} from '../services/local-storage.service';
 import {NotificationService} from '../services/notification.service';
+// import {SearchByStringPipe} from '../pipes/search-by-string.pipe';
 import {IonicSelectableComponent} from 'ionic-selectable';
 import { map } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
