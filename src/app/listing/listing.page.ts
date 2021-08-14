@@ -31,12 +31,14 @@ export class ListingPage implements OnInit {
 	customers_raw: any;
 	customersFilterData: any;
 	customer_info: any = {
-		classification: 'N/A',
+		division: 'N/A',
+    subdivision: 'N/A',
+    region: 'N/A',
 		city: 'N/A',
+		classification: 'N/A',
 		salesRepName: 'N/A',
 		salesRepNumber: 'N/A',
 		agencyCat: 'N/A',
-		division: 'N/A',
 		images: {
 			BALADIYA_CERT_IMG: this.dummy_img,
 			BR_CR_CERT_IMG: this.dummy_img,
@@ -93,23 +95,19 @@ export class ListingPage implements OnInit {
 
   initFrmVatUpdate= ()=> {
     this.frmVatUpdate = this.formBuilder.group({
+      customer_name: ['N/A', Validators.required ],
+      customer_name_ar: ['N/A', Validators.required ],
       vat: ['N/A', Validators.required ],
       maincr: ['N/A', Validators.required ],
-      branchcr: ['N/A', Validators.required ],
-      coc: ['N/A', Validators.required ],
-      baldiya: ['N/A', Validators.required ],
-      // address: ['N/A', Validators.required ],
     });
   }
 
   resetFrmVatUpdate = ()=>{
   	this.frmVatUpdate.patchValue({
+  	  customer_name: 'N/A',
+  	  customer_name_ar: 'N/A',
   	  vat: 'N/A',
   	  maincr: 'N/A',
-  	  branchcr: 'N/A',
-  	  coc: 'N/A',
-  	  baldiya: 'N/A',
-  	  // address: (custRow.CITY) ? custRow.CITY : 'N/A',
   	});
 
   	// reset selected customer
@@ -121,12 +119,14 @@ export class ListingPage implements OnInit {
   	this.image_switcher.title = '';
 
   	// reset select customer info
-		this.customer_info.classification = 'N/A';
+    this.customer_info.division = 'N/A';
+    this.customer_info.subdivision = 'N/A';
+		this.customer_info.region = 'N/A';
 		this.customer_info.city = 'N/A';
+		this.customer_info.classification = 'N/A';
 		this.customer_info.salesRepName = 'N/A';
 		this.customer_info.salesRepNumber = 'N/A';
 		this.customer_info.agencyCat = 'N/A';
-		this.customer_info.division = 'N/A';
 	}
 
   fetchSelectedCustomer = (customer_number)=>{
@@ -137,25 +137,25 @@ export class ListingPage implements OnInit {
   		return (i.CUST_NUMBER == customer_number);
   	});
 
-  	console.log(customer_number, 'cn');
+  	console.log(custRow, 'cn');
   	
   	custRow = custRow[0];
-
+    // return;
   	this.frmVatUpdate.patchValue({
+      customer_name: (custRow.CUST_NAME) ? custRow.CUST_NAME : 'N/A',
+      customer_name_ar: (custRow.VAT_NUM) ? custRow.VAT_NUM : 'N/A',
   	  vat: (custRow.VAT_NUM) ? custRow.VAT_NUM : 'N/A',
   	  maincr: (custRow.MAIN_CR_NUM) ? custRow.MAIN_CR_NUM : 'N/A',
-  	  branchcr: (custRow.BR_CR_NUM) ? custRow.BR_CR_NUM : 'N/A',
-  	  coc: (custRow.COC_NUM) ? custRow.COC_NUM : 'N/A',
-  	  baldiya: (custRow.BALADIYA_NUM) ? custRow.BALADIYA_NUM : 'N/A',
-  	  // address: (custRow.CITY) ? custRow.CITY : 'N/A',
   	});
 
-		this.customer_info.classification = (custRow.CLASSIFICATION) ? custRow.CLASSIFICATION : 'N/A',
-		this.customer_info.city = (custRow.CITY) ? custRow.CITY : 'N/A',
-		this.customer_info.salesRepName = (custRow.SALESREP_NAME) ? custRow.SALESREP_NAME : 'N/A',
-		this.customer_info.salesRepNumber = (custRow.SALESREP_NUMBER) ? custRow.SALESREP_NUMBER : 'N/A',
-		this.customer_info.agencyCat = (custRow.AGENCY_CATEGORY) ? custRow.AGENCY_CATEGORY : 'N/A',
-		this.customer_info.division = (custRow.DIVISION) ? custRow.DIVISION : 'N/A',
+    this.customer_info.division = (custRow.DIVISION) ? custRow.DIVISION : 'N/A';
+		this.customer_info.subdivision = (custRow.SUB_DIVISION) ? custRow.SUB_DIVISION : 'N/A';
+		this.customer_info.region = (custRow.REGION) ? custRow.REGION : 'N/A';
+		this.customer_info.city = (custRow.CITY) ? custRow.CITY : 'N/A';
+    this.customer_info.classification = (custRow.CLASSIFICATION) ? custRow.CLASSIFICATION : 'N/A';
+		this.customer_info.salesRepName = (custRow.SALESREP_NAME) ? custRow.SALESREP_NAME : 'N/A';
+		this.customer_info.salesRepNumber = (custRow.SALESREP_NUMBER) ? custRow.SALESREP_NUMBER : 'N/A';
+		this.customer_info.agencyCat = (custRow.AGENCY_CATEGORY) ? custRow.AGENCY_CATEGORY : 'N/A';
   
 		this.NotificationService.presentLoading();
 
@@ -214,15 +214,17 @@ export class ListingPage implements OnInit {
   		P_LONGITUDE: 'Null', 
   		P_VAT_NUM: this.frmVatUpdate.value.vat,
   		P_MAIN_CR_NUM: this.frmVatUpdate.value.maincr, 
-  		P_BR_CR_NUM: this.frmVatUpdate.value.branchcr,
-  		P_COC_NUM: this.frmVatUpdate.value.coc,
-  		P_BALADIYA_NUM: this.frmVatUpdate.value.baldiya,
+  		P_BR_CR_NUM: null,
+  		P_COC_NUM: null,
+  		P_BALADIYA_NUM: null,
   		P_VAT_CERT_IMG: 'NULL',
   		P_MAIN_CR_CERT_IMG: 'NULL', 
   		P_BR_CR_CERT_IMG: 'NULL',
   		P_COC_CERT_IMG: 'NULL',
   		P_BALADIYA_CERT_IMG: 'NULL', 
   		P_NATIONAL_ADD_IMG: 'NULL',
+      P_CUS_NAME: this.frmVatUpdate.value.customer_name,
+      P_CUS_NAME_AR: this.frmVatUpdate.value.customer_name_ar,
   	}
 
   	console.log(body);

@@ -13,77 +13,71 @@
     	<div>
 				<form [formGroup]="frmVatUpdate">
 					<div class="widthb100 df fww jcsb ccard pt0 tl0 pb1 pr0 mt2 mb1">
-						<div class="cform-group widthb33 dib">
+						<!-- <div class="cform-group widthb33 dib">
 						  <ion-item>
 						    <ion-label position="">Customer Number</ion-label>
 						    <ion-input type="text" readonly value="{{selected_customer!='' ? selected_customer : 'N/A' }}"></ion-input>
 						  </ion-item>
-						</div>
+						</div> -->
 
-						<div class="cform-group widthb33 dib">
+						<div class="cform-group widthb24 dib">
 	  				  <ion-item>
-	  				    <ion-label position="">VAT</ion-label>
-	  				    <ion-input type="text" formControlName="vat"></ion-input>
+	  				    <ion-label position="">Customer Name (EN)</ion-label>
+	  				    <ion-input type="text" formControlName="customer_name"></ion-input>
 	  				  </ion-item>
 	  				</div>
 
-	  				<div class="cform-group widthb33 dib">
+	  				<div class="cform-group widthb24 dib">
+	  				  <ion-item>
+	  				    <ion-label position="">Customer Name (AR)</ion-label>
+	  				    <ion-input type="text" formControlName="customer_name_ar"></ion-input>
+	  				  </ion-item>
+	  				</div>
+
+	  				<div class="cform-group widthb24 dib">
 	  				  <ion-item>
 	  				    <ion-label position="">Main CR #</ion-label>
 	  				    <ion-input type="text" formControlName="maincr"></ion-input>
 	  				  </ion-item>
 	  				</div>
 
-	  				<div class="cform-group widthb33 dib">
+						<div class="cform-group widthb24 dib">
 	  				  <ion-item>
-	  				    <ion-label position="">Branch CR #</ion-label>
-	  				    <ion-input type="text" formControlName="branchcr"></ion-input>
+	  				    <ion-label position="">VAT</ion-label>
+	  				    <ion-input type="text" formControlName="vat"></ion-input>
 	  				  </ion-item>
 	  				</div>
-
-	  				<div class="cform-group widthb33 dib">
-	  				  <ion-item>
-	  				    <ion-label position="">COC #</ion-label>
-	  				    <ion-input type="text" formControlName="coc"></ion-input>
-	  				  </ion-item>
-	  				</div>
-
-	  				<div class="cform-group widthb33 dib">
-	  				  <ion-item>
-	  				    <ion-label position="">Baldiya #</ion-label>
-	  				    <ion-input type="text" formControlName="baldiya"></ion-input>
-	  				  </ion-item>
-	  				</div>
-
-	  				<!-- <div class="cform-group widthb33 dib">
-	  				  <ion-item>
-	  				    <ion-label position="">Customer Number</ion-label>
-	  				    <ion-input type="text"></ion-input>
-	  				  </ion-item>
-	  				</div> -->
 
 	  				<!-- <div class="cust_info"> -->
-		  				<div class="cform-group widthb33 dib cust_info">
+		  				<div class="cform-group widthb24 dib cust_info">
+	  				  	<span> <b class="tc1"> Customer # </b>: {{selected_customer!='' ? selected_customer : 'N/A' }} </span>
+		  				</div>
+
+		  				<div class="cform-group widthb24 dib cust_info">
 	  				  	<span> <b class="tc1"> Division</b>: {{customer_info.division}} </span>
 		  				</div>
 
-		  				<div class="cform-group widthb33 dib cust_info">
+		  				<div class="cform-group widthb24 dib cust_info">
+	  				  	<span> <b class="tc1"> Sub-Division</b>: {{customer_info.subdivision}} </span>
+		  				</div>
+
+		  				<div class="cform-group widthb24 dib cust_info">
 	  				  	<span> <b class="tc1"> Classification</b>: {{customer_info.classification}} </span>
 		  				</div>
 
-		  				<div class="cform-group widthb33 dib cust_info">
+		  				<div class="cform-group widthb24 dib cust_info">
 	  				  	<span> <b class="tc1"> City</b>: {{customer_info.city}} </span>
 		  				</div>
 
-		  				<div class="cform-group widthb33 dib cust_info">
+		  				<div class="cform-group widthb24 dib cust_info">
 	  				  	<span> <b class="tc1"> Sales Rep. Name</b>: {{customer_info.salesRepName}} </span>
 		  				</div>
 
-		  				<div class="cform-group widthb33 dib cust_info">
+		  				<div class="cform-group widthb24 dib cust_info">
 	  				  	<span> <b class="tc1"> Sales Rep Number</b>: {{customer_info.salesRepNumber}} </span>
 		  				</div>
 
-		  				<div class="cform-group widthb33 dib cust_info">
+		  				<div class="cform-group widthb24 dib cust_info">
 	  				  	<span> <b class="tc1"> Agency Category</b>: {{customer_info.agencyCat}} </span>
 		  				</div>
 		  			<!-- </div> -->

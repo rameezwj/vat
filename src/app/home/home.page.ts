@@ -20,8 +20,8 @@ export class HomePage {
 	frmVat: FormGroup;
 	customers: any = [];
 	customer_info: any = {
-		customer_name: '',
-		customer_name_ar: ''
+		customer_name: 'N/A',
+		customer_name_ar: 'N/A'
 	}
 	file_names: any = {'file_vat': '', 'file_maincr': '', 'file_branchcr': '', 'file_coc': '', 'file_baldiya': ''};
 
@@ -47,7 +47,7 @@ export class HomePage {
   		
   	// if(false){
 		if(this.frmVat.status!='VALID'){
-			this.NotificationService.alert('Alert', 'Please enter valid crendetials');
+			this.NotificationService.alert('Alert', 'All fields are mandatory');
 			return false;
 		}
 
