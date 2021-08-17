@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
 		const body = { username: this.frmLogin.value.username, password: this.frmLogin.value.password };
 		
-		this.http.post<any>('http://localhost:12123/login', body).subscribe(res => {
+		this.http.post<any>('http://localhost:3005/login', body).subscribe(res => {
 		   
 		   this.NotificationService.dismissLoading();
 

@@ -58,7 +58,7 @@ app.use(
 
 // login
   app.post(
-    '/login',
+    '/apis/login',
     body('username').not().isEmpty().trim().escape(),
     body('password').not().isEmpty().trim().escape(),
     async function(req, res){
@@ -111,7 +111,7 @@ app.use(
 
 // get sales customer
   app.post(
-    '/getSalesCustomers',
+    '/apis/getSalesCustomers',
     body('USER_ID').not().isEmpty().trim().escape(),
     async function(req, res){
 
@@ -160,7 +160,7 @@ app.use(
 
 // get customers
   app.post(
-    '/getCustomers',
+    '/apis/getCustomers',
     async function(req, res){
 
     let REGION = req.body.REGION,
@@ -215,7 +215,7 @@ app.use(
 
 // get single customer images
   app.post(
-    '/getCustomerImages',
+    '/apis/getCustomerImages',
     body('customerNumber').not().isEmpty().trim().escape(),
     async function(req, res){
 
@@ -270,7 +270,7 @@ app.use(
 
 // insert/update vat
   app.post(
-    '/updateVat',
+    '/apis/updateVat',
     async function(req, res){
 
     let USER_ID = req.body.P_USER_ID,
@@ -371,7 +371,7 @@ app.use(
 // insert/update vat
 
 app.get(
-  '/v',
+  '/apis/v',
   function(req, res){
     console.log('ran');
     res.send('ran');
@@ -396,6 +396,6 @@ app.use(function(req, res, next){
   res.type('txt').send('Not found');
 });
 
-const port = 12123;
+const port = 3005;
 
 app.listen(port, () => console.log('Example app listening on port '+ port));

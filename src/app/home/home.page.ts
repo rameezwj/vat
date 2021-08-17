@@ -77,7 +77,7 @@ export class HomePage {
   	// return false;
 		this.NotificationService.presentLoading();
 
-  	this.http.post<any>('http://localhost:12123/updateVat', body).subscribe(res => {
+  	this.http.post<any>('http://localhost:3005/updateVat', body).subscribe(res => {
 
 			this.NotificationService.dismissLoading();
 			
@@ -209,7 +209,7 @@ export class HomePage {
 		
 		this.NotificationService.presentLoading();
 		
-		this.http.post<any>('http://localhost:12123/getSalesCustomers', body).subscribe(res => {
+		this.http.post<any>('http://localhost:3005/getSalesCustomers', body).subscribe(res => {
 		   
 		   this.NotificationService.dismissLoading();
 

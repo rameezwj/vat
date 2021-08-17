@@ -76,7 +76,7 @@ export class ListingPage implements OnInit {
 
   	this.NotificationService.presentLoading();
 
-  	this.http.post<any>('http://localhost:12123/getCustomers', body).subscribe(res => {
+  	this.http.post<any>('http://localhost:3005/getCustomers', body).subscribe(res => {
 
 			this.NotificationService.dismissLoading()
 			
@@ -161,7 +161,7 @@ export class ListingPage implements OnInit {
 
 		const body = {customerNumber: customer_number};
 
-  	this.http.post<any>('http://localhost:12123/getCustomerImages', body).subscribe(res => {
+  	this.http.post<any>('http://localhost:3005/getCustomerImages', body).subscribe(res => {
 
 			this.NotificationService.dismissLoading();
 			
@@ -232,7 +232,7 @@ export class ListingPage implements OnInit {
   	// return false;
 		this.NotificationService.presentLoading();
 
-  	this.http.post<any>('http://localhost:12123/updateVat', body).subscribe(res => {
+  	this.http.post<any>('http://localhost:3005/updateVat', body).subscribe(res => {
 
 			this.NotificationService.dismissLoading();
 			
