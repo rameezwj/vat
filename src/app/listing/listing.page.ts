@@ -10,6 +10,7 @@ import {NotificationService} from '../services/notification.service';
 import {IonicSelectableComponent} from 'ionic-selectable';
 import { map } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import {environment} from '../../environments/environment';
 
 // import dummy from './dummy.json';
 
@@ -76,7 +77,7 @@ export class ListingPage implements OnInit {
 
   	this.NotificationService.presentLoading();
 
-  	this.http.post<any>('http://localhost:3005/getCustomers', body).subscribe(res => {
+  	this.http.post<any>(`${environment.base_url}/getCustomers`, body).subscribe(res => {
 
 			this.NotificationService.dismissLoading()
 			
@@ -161,7 +162,7 @@ export class ListingPage implements OnInit {
 
 		const body = {customerNumber: customer_number};
 
-  	this.http.post<any>('http://localhost:3005/getCustomerImages', body).subscribe(res => {
+  	this.http.post<any>(`${environment.base_url}/getCustomerImages`, body).subscribe(res => {
 
 			this.NotificationService.dismissLoading();
 			
@@ -232,7 +233,7 @@ export class ListingPage implements OnInit {
   	// return false;
 		this.NotificationService.presentLoading();
 
-  	this.http.post<any>('http://localhost:3005/updateVat', body).subscribe(res => {
+  	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
 			this.NotificationService.dismissLoading();
 			

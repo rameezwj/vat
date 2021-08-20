@@ -7,6 +7,7 @@ import {Observable, Subscriber} from 'rxjs';
 import {LocalStorageService} from '../services/local-storage.service';
 import {NotificationService} from '../services/notification.service';
 import {IonicSelectableComponent} from 'ionic-selectable';
+import {environment} from '../../environments/environment';
 
 
 @Component({
@@ -77,7 +78,7 @@ export class HomePage {
   	// return false;
 		this.NotificationService.presentLoading();
 
-  	this.http.post<any>('http://localhost:3005/updateVat', body).subscribe(res => {
+  	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
 			this.NotificationService.dismissLoading();
 			
@@ -209,7 +210,7 @@ export class HomePage {
 		
 		this.NotificationService.presentLoading();
 		
-		this.http.post<any>('http://localhost:3005/getSalesCustomers', body).subscribe(res => {
+		this.http.post<any>(`${environment.base_url}/getSalesCustomers`, body).subscribe(res => {
 		   
 		   this.NotificationService.dismissLoading();
 

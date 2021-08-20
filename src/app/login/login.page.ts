@@ -6,7 +6,7 @@ import {DataService} from '../data.service';
 import {Observable} from 'rxjs';
 import {LocalStorageService} from '../services/local-storage.service';
 import {NotificationService} from '../services/notification.service';
-
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
 		const body = { username: this.frmLogin.value.username, password: this.frmLogin.value.password };
 		
-		this.http.post<any>('http://localhost:3005/login', body).subscribe(res => {
+		this.http.post<any>(`${environment.base_url}/login`, body).subscribe(res => {
 		   
 		   this.NotificationService.dismissLoading();
 
