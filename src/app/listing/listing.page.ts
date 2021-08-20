@@ -144,7 +144,7 @@ export class ListingPage implements OnInit {
     // return;
   	this.frmVatUpdate.patchValue({
       customer_name: (custRow.CUST_NAME) ? custRow.CUST_NAME : 'N/A',
-      customer_name_ar: (custRow.VAT_NUM) ? custRow.VAT_NUM : 'N/A',
+      customer_name_ar: (custRow.CUST_NAME_AR) ? custRow.CUST_NAME_AR : 'N/A',
   	  vat: (custRow.VAT_NUM) ? custRow.VAT_NUM : 'N/A',
   	  maincr: (custRow.MAIN_CR_NUM) ? custRow.MAIN_CR_NUM : 'N/A',
   	});
