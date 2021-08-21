@@ -77,7 +77,7 @@ export class ListingPage implements OnInit {
 
   	this.http.post<any>(`${environment.base_url}/getCustomers`, body).subscribe(res => {
 
-			this.NotificationService.dismissLoading()
+			// this.NotificationService.dismissLoading();;;
 			
 			if(res.status=='Success' && res.data.length > 0){
 				this.customers_raw = res.data;
@@ -170,7 +170,7 @@ export class ListingPage implements OnInit {
 
   	this.http.post<any>(`${environment.base_url}/getCustomerImages`, body).subscribe(res => {
 
-			this.NotificationService.dismissLoading();
+			// this.NotificationService.dismissLoading();;;
 			
 			let images = res.data[0];
       /*console.log(res);
@@ -234,7 +234,7 @@ export class ListingPage implements OnInit {
 
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
-			this.NotificationService.dismissLoading();
+			// this.NotificationService.dismissLoading();;;
 			
 			if(res.status=='Success'){
 				console.log(res)

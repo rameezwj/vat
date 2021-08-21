@@ -74,7 +74,7 @@ export class HomePage {
 
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
-			this.NotificationService.dismissLoading();
+			// this.NotificationService.dismissLoading();;;
 			
 			if(res.status=='Success'){
 				console.log(res)
@@ -198,7 +198,7 @@ export class HomePage {
 		
 		this.http.post<any>(`${environment.base_url}/getSalesCustomers`, body).subscribe(res => {
 		   
-		   this.NotificationService.dismissLoading();
+		   // this.NotificationService.dismissLoading();;;
 
 		   if(res.status=='Success' && res.data.length > 0){
         
