@@ -70,11 +70,11 @@ export class HomePage {
   	console.log(body);
 
   	// return false;
-		this.NotificationService.presentLoading();
+		this.NotificationService.presentLoading();;;
 
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
-			// this.NotificationService.dismissLoading();;;
+			this.NotificationService.dismissLoading();;;
 			
 			if(res.status=='Success'){
 				console.log(res)
@@ -194,7 +194,7 @@ export class HomePage {
 			USER_ID: this.loggedInUser.USER_ID
 		};
 		
-		this.NotificationService.presentLoading();
+		// this.NotificationService.presentLoading();;;
 		
 		this.http.post<any>(`${environment.base_url}/getSalesCustomers`, body).subscribe(res => {
 		   

@@ -73,7 +73,7 @@ export class ListingPage implements OnInit {
   		REGION: this.loggedInUser.USER_REGION
   	};
 
-  	this.NotificationService.presentLoading();
+  	// this.NotificationService.presentLoading();;;
 
   	this.http.post<any>(`${environment.base_url}/getCustomers`, body).subscribe(res => {
 
@@ -162,7 +162,7 @@ export class ListingPage implements OnInit {
       /*console.log(customer, 'cn');
       return false;*/
 
-		this.NotificationService.presentLoading();
+		// this.NotificationService.presentLoading();;;
 
     const body = {
       P_CUST_ID: customer.CDC_CUS_ID,
@@ -230,11 +230,11 @@ export class ListingPage implements OnInit {
     // console.table(body);
   	// return false;
 
-		this.NotificationService.presentLoading();
+		this.NotificationService.presentLoading();;;
 
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
-			// this.NotificationService.dismissLoading();;;
+			this.NotificationService.dismissLoading();;;
 			
 			if(res.status=='Success'){
 				console.log(res)
