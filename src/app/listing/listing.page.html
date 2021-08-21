@@ -13,44 +13,44 @@
     	<div>
 				<form [formGroup]="frmVatUpdate">
 					<div class="widthb100 df fww jcsb ccard pt0 tl0 pb1 pr0 mt2 mb1">
-						<!-- <div class="cform-group widthb33 dib">
+						<div class="cform-group widthb20">
 						  <ion-item>
-						    <ion-label position="">Customer Number</ion-label>
-						    <ion-input type="text" readonly value="{{selected_customer!='' ? selected_customer : 'N/A' }}"></ion-input>
+						    <ion-label position="floating">Customer Arabic Name <b class="tc1">(As per VAT)</b></ion-label>
+						    <ion-input type="text" formControlName="cust_name_ar_vat"></ion-input>
 						  </ion-item>
-						</div> -->
+						</div>
 
-						<div class="cform-group widthb24 dib">
-	  				  <ion-item>
-	  				    <ion-label position="">Customer Name (EN)</ion-label>
-	  				    <ion-input type="text" formControlName="customer_name"></ion-input>
-	  				  </ion-item>
-	  				</div>
+						<div class="cform-group widthb20">
+						  <ion-item>
+						    <ion-label position="floating">Customer Business name</ion-label>
+						    <ion-input type="text" formControlName="cust_business_name_vat"></ion-input>
+						  </ion-item>
+						</div>
 
-	  				<div class="cform-group widthb24 dib">
-	  				  <ion-item>
-	  				    <ion-label position="">Customer Name (AR)</ion-label>
-	  				    <ion-input type="text" formControlName="customer_name_ar"></ion-input>
-	  				  </ion-item>
-	  				</div>
+						<div class="cform-group widthb20">
+						  <ion-item>
+						    <ion-label position="floating">VAT</ion-label>
+						    <ion-input type="text" formControlName="vat"></ion-input>
+						  </ion-item>
+						</div>
 
-	  				<div class="cform-group widthb24 dib">
+	  				<div class="cform-group widthb20">
 	  				  <ion-item>
-	  				    <ion-label position="">Main CR #</ion-label>
+	  				    <ion-label position="floating">CR #</ion-label>
 	  				    <ion-input type="text" formControlName="maincr"></ion-input>
 	  				  </ion-item>
 	  				</div>
 
-						<div class="cform-group widthb24 dib">
+	  				<div class="cform-group widthb20">
 	  				  <ion-item>
-	  				    <ion-label position="">VAT</ion-label>
-	  				    <ion-input type="text" formControlName="vat"></ion-input>
+	  				    <ion-label position="floating"> Address </ion-label>
+	  				    <ion-input type="text" formControlName="address"></ion-input>
 	  				  </ion-item>
 	  				</div>
 
 	  				<!-- <div class="cust_info"> -->
 		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> Customer # </b>: {{selected_customer!='' ? selected_customer : 'N/A' }} </span>
+	  				  	<span> <b class="tc1"> Customer # </b>: {{selected_customer!='' ? selected_customer.CUST_NUMBER : 'N/A' }} </span>
 		  				</div>
 
 		  				<div class="cform-group widthb24 dib cust_info">
@@ -99,7 +99,7 @@
 							<tr>
 								<th class="widthb30"> Cust. Number </th>
 								<th class="widthb50"> Cust. Name </th>
-								<th class="widthb20 tar"> اسم الزبون  </th>
+								<th class="widthb20"> Region  </th>
 							</tr>
 						</thead>
 					</table>
@@ -114,7 +114,7 @@
 								</tr>
 							</thead> -->
 							<tbody>
-								<tr *ngFor="let customer of customersFilterData" (click)="fetchSelectedCustomer(customer.CUST_NUMBER)">
+								<tr *ngFor="let customer of customersFilterData" (click)="fetchSelectedCustomer(customer)">
 									<td class="widthb30">
 										<span>
 											{{customer.CUST_NUMBER}}
@@ -127,9 +127,9 @@
 										</span>
 									</td>
 
-									<td class="widthb20 tar">
+									<td class="widthb20">
 										<span>
-											{{customer.CUST_NAME_AR}}
+											{{customer.REGION}}
 										</span>
 									</td>
 								</tr>

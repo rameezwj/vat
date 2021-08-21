@@ -68,13 +68,8 @@ app.use(
 
     try {
         conn = await oracledb.getConnection(config1)
-        console.log(conn, 'cn');
-        /*let query = `
-          SELECT * FROM 
-          TBL_SYS_USER_LOGIN u,
-          TBL_CUSTOMER_APP_DATA c
-          WHERE u.USER_ID='${username}' AND u.USER_PASSWORD='${password}' AND u.USER_ID = c.SALESREP_NUMBER AND u.USER_REGION = c.REGION`;*/
-
+        // console.log(conn, 'cn');
+        
         let query = `
           SELECT * FROM 
           TBL_SYS_USER_LOGIN u
@@ -119,12 +114,7 @@ app.use(
 
     try {
         conn = await oracledb.getConnection(config1);
-        console.log(conn, 'cn');
-        /*let query = `
-          SELECT * FROM
-          TBL_SYS_USER_LOGIN u,
-          TBL_CUSTOMER_APP_DATA c
-          WHERE u.USER_ID='${USER_ID}' AND u.USER_ID = c.SALESREP_NUMBER AND u.USER_REGION = c.REGION AND SALES_SUBMITTED IS NULL`;*/
+        // console.log(conn, 'cn');
         
         let query = `
           SELECT * FROM
@@ -164,19 +154,19 @@ app.use(
     async function(req, res){
 
     let REGION = req.body.REGION,
+        USER_TYPE = req.body.USER_TYPE,
         LOGIN_USER = req.body.USER_ID;
 
-      // console.log(req.body)
     try {
         conn = await oracledb.getConnection(config1)
 
-        // let query = `BEGIN TEST1(:cursor); END;`;
-        let query = `BEGIN PROC_CUSTOMER_LIST(:P_REGION, :P_LOGIN_USER, :cursor); END;`;
+        let query = `BEGIN PROC_CUSTOMER_LIST(:P_REGION, :P_LOGIN_USER, :P_USER_TYPE, :cursor); END;`;
 
         const result = await conn.execute(
           query,
           {
             P_REGION: REGION,
+            P_USER_TYPE: USER_TYPE,
             P_LOGIN_USER: LOGIN_USER,
             cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT},
           },
@@ -219,23 +209,23 @@ app.use(
     body('customerNumber').not().isEmpty().trim().escape(),
     async function(req, res){
 
-    let customerNumber = req.body.customerNumber;
-    // console.log(req, 'ssssssssssssssssssss');
+    let CUST_ID = req.body.P_CUST_ID;
+
     try {
         conn = await oracledb.getConnection(config1)
 
         // let query = `BEGIN TEST1(:cursor); END;`;
-        let query = `BEGIN PROC_CUSTOMER_IMAGE(:P_CUST_NUMBER, :cursor); END;`;
+        let query = `BEGIN PROC_CUSTOMER_IMAGE(:P_CUST_ID, :cursor); END;`;
 
         const result = await conn.execute(
           query,
           {
-            P_CUST_NUMBER: customerNumber,
+            P_CUST_ID: CUST_ID,
             cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT},
           },
           {outFormat: oracledb.OUT_FORMAT_OBJECT});
 
-        console.dir(result.outBinds.cursor, {depth: null});
+        // console.dir(result.outBinds.cursor, {depth: null});
 
         const resultSet = result.outBinds.cursor;
         let row;
@@ -274,47 +264,43 @@ app.use(
     async function(req, res){
 
     let USER_ID = req.body.P_USER_ID,
-        CUST_NUMBER = req.body.P_CUST_NUMBER,
+        CUST_ID = req.body.P_CUST_ID, 
+        CUST_NUMBER = req.body.P_CUST_NUMBER, 
         USER_TYPE = req.body.P_USER_TYPE,
-        LATITUDE = req.body.P_LATITUDE,
-        LONGITUDE = req.body.P_LONGITUDE,
+        LATITUDE = req.body.P_LATITUDE, 
+        LONGITUDE = req.body.P_LONGITUDE, 
         VAT_NUM = req.body.P_VAT_NUM,
-        MAIN_CR_NUM = req.body.P_MAIN_CR_NUM,
-        BR_CR_NUM = req.body.P_BR_CR_NUM,
-        COC_NUM = req.body.P_COC_NUM,
-        BALADIYA_NUM = req.body.P_BALADIYA_NUM,
+        MAIN_CR_NUM = req.body.P_MAIN_CR_NUM, 
+        ADDRESS = req.body.P_ADDRESS,
+        BUSNIESS_NAME = req.body.P_BUSNIESS_NAME,
+        CUS_NAME_AR_VAT = req.body.P_CUS_NAME_AR_VAT,
         VAT_CERT_IMG = req.body.P_VAT_CERT_IMG,
-        MAIN_CR_CERT_IMG = req.body.P_MAIN_CR_CERT_IMG,
-        BR_CR_CERT_IMG = req.body.P_BR_CR_CERT_IMG,
-        COC_CERT_IMG = req.body.P_COC_CERT_IMG,
-        BALADIYA_CERT_IMG = req.body.P_BALADIYA_CERT_IMG,
-        NATIONAL_ADD_IMG = req.body.P_NATIONAL_ADD_IMG;
+        MAIN_CR_CERT_IMG = req.body.P_MAIN_CR_CERT_IMG, 
+        NATIONAL_ADD_IMG = req.body.P_NATIONAL_ADD_IMG,
         CUS_NAME = req.body.P_CUS_NAME;
-        CUS_NAME_AR = req.body.P_CUS_NAME_AR;
-        // CUS_NAME_AR = "sdsd";
+
+        /*console.log(req.body);
+        return false;*/
 
     try {
         conn = await oracledb.getConnection(config1)
 
         let query = `BEGIN PROC_CUSTOMER_UPDATE(
           :P_USER_ID,
+          :P_CUST_ID,
           :P_CUST_NUMBER,
           :P_USER_TYPE,
           :P_LATITUDE,
           :P_LONGITUDE,
           :P_VAT_NUM,
           :P_MAIN_CR_NUM,
-          :P_BR_CR_NUM,
-          :P_COC_NUM,
-          :P_BALADIYA_NUM,
+          :P_ADDRESS,
+          :P_BUSNIESS_NAME,
+          :P_CUS_NAME_AR_VAT,
           :P_VAT_CERT_IMG,
           :P_MAIN_CR_CERT_IMG,
-          :P_BR_CR_CERT_IMG,
-          :P_COC_CERT_IMG,
-          :P_BALADIYA_CERT_IMG,
           :P_NATIONAL_ADD_IMG,
           :P_CUS_NAME,
-          :P_CUS_NAME_AR,
           :cursor
           );
 
@@ -324,23 +310,20 @@ app.use(
           query,
           {
             P_USER_ID: USER_ID,
+            P_CUST_ID: CUST_ID,
             P_CUST_NUMBER: CUST_NUMBER,
             P_USER_TYPE: USER_TYPE,
             P_LATITUDE: LATITUDE,
             P_LONGITUDE: LONGITUDE,
             P_VAT_NUM: VAT_NUM,
             P_MAIN_CR_NUM: MAIN_CR_NUM,
-            P_BR_CR_NUM: BR_CR_NUM,
-            P_COC_NUM: COC_NUM,
-            P_BALADIYA_NUM: BALADIYA_NUM,
+            P_ADDRESS: ADDRESS,
+            P_BUSNIESS_NAME: BUSNIESS_NAME,
+            P_CUS_NAME_AR_VAT: CUS_NAME_AR_VAT,
             P_VAT_CERT_IMG: VAT_CERT_IMG,
             P_MAIN_CR_CERT_IMG: MAIN_CR_CERT_IMG,
-            P_BR_CR_CERT_IMG: BR_CR_CERT_IMG,
-            P_COC_CERT_IMG: COC_CERT_IMG,
-            P_BALADIYA_CERT_IMG: BALADIYA_CERT_IMG,
             P_NATIONAL_ADD_IMG: NATIONAL_ADD_IMG,
             P_CUS_NAME: CUS_NAME,
-            P_CUS_NAME_AR: CUS_NAME_AR,
             cursor: { dir: oracledb.BIND_OUT, type: oracledb.STRING } , 
           },
           {outFormat: oracledb.OUT_FORMAT_OBJECT});

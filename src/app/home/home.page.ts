@@ -20,17 +20,14 @@ export class HomePage {
 	loggedInUser: any;
 	frmVat: FormGroup;
 	customers: any = [];
-	customer_info: any = {
-		customer_name: 'N/A',
-		customer_name_ar: 'N/A'
-	}
+	
 	file_names: any = {'file_vat': '', 'file_maincr': '', 'file_branchcr': '', 'file_coc': '', 'file_baldiya': ''};
 
 	constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService) {
 
 		this.loggedInUser = this.localStorageService.getItem('user_info');
 
-		console.log(this.loggedInUser);
+		// console.log(this.loggedInUser);
 
 		this.getCustomers();
 	}
@@ -46,31 +43,28 @@ export class HomePage {
   frmVatSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
   		
-  	// if(false){
-		if(this.frmVat.status!='VALID'){
+  	if(false){
+		// if(this.frmVat.status!='VALID'){
 			this.NotificationService.alert('Alert', 'All fields are mandatory');
 			return false;
 		}
 
   	const body = {
   		P_USER_ID: this.loggedInUser.USER_ID,
-  		P_CUST_NUMBER: this.frmVat.value.customer_number.cus_number, 
+  		P_CUST_ID: this.frmVat.value.customer_dd.cus_id, 
+  		P_CUST_NUMBER: this.frmVat.value.customer_dd.cus_number, 
   		P_USER_TYPE: this.loggedInUser.USER_TYPE,
   		P_LATITUDE: 'Null', 
   		P_LONGITUDE: 'Null', 
   		P_VAT_NUM: this.frmVat.value.vat,
   		P_MAIN_CR_NUM: this.frmVat.value.maincr, 
-  		P_BR_CR_NUM: 'N/A',
-  		P_COC_NUM: this.frmVat.value.coc,
-  		P_BALADIYA_NUM: this.frmVat.value.baldiya,
+  		P_ADDRESS: this.frmVat.value.address,
+  		P_BUSNIESS_NAME: this.frmVat.value.cust_business_name_vat,
+  		P_CUS_NAME_AR_VAT: this.frmVat.value.cust_name_ar_vat,
   		P_VAT_CERT_IMG: this.frmVat.value.file_vat,
   		P_MAIN_CR_CERT_IMG: this.frmVat.value.file_maincr, 
-  		P_BR_CR_CERT_IMG: null,
-  		P_COC_CERT_IMG: this.frmVat.value.file_coc,
-  		P_BALADIYA_CERT_IMG: this.frmVat.value.file_baldiya, 
   		P_NATIONAL_ADD_IMG: this.frmVat.value.file_address,
-  		P_CUS_NAME: 'english',
-  		P_CUS_NAME_AR: 'arabic',
+  		P_CUS_NAME: this.frmVat.value.customer_dd.cus_name,
   	}
 
   	console.log(body);
@@ -92,41 +86,33 @@ export class HomePage {
 
 	initFrmVat= ()=> {
 	  this.frmVat = this.formBuilder.group({
-	    customer_number: ['', Validators.required ],
+	    customer_dd: ['', Validators.required ],
+	    cust_name_ar_vat: ['', Validators.required ],
+	    cust_business_name_vat: ['', Validators.required ],
 	    vat: ['', Validators.required ],
 	    file_vat: ['', Validators.required ],
 	    maincr: ['', Validators.required ],
 	    file_maincr: ['', Validators.required ],
-	    /*branchcr: ['', valueidators.required ],
-	    file_branchcr: ['', Validators.required ],*/
-	    coc: ['', Validators.required ],
-	    file_coc: ['', Validators.required ],
-	    baldiya: ['', Validators.required ],
-	    file_baldiya: ['', Validators.required ],
-	    // address: [''],
 	    file_address: ['', Validators.required ],
+	    address: ['', Validators.required ],
 	  });
 	}
 
   resetfrmVat = ()=>{
   	this.frmVat.patchValue({
-  	  customer_number: '',
+  	  customer_dd: '',
+  	  cust_name_ar_vat: '',
+  	  cust_business_name_vat: '',
   	  vat: '',
   	  file_vat: '',
   	  maincr: '',
   	  file_maincr: '',
-  	  /*branchcr: '',
-  	  file_branchcr: '',*/
-  	  coc: '',
-  	  file_coc: '',
-  	  baldiya: '',
-  	  file_baldiya: '',
-  	  // address: '',
   	  file_address: '',
+  	  address: '',
   	});
 
-  	this.customer_info.customer_name = '';
-  	this.customer_info.customer_name_ar = '';
+  	this.customers.customer_name = '';
+  	this.customers.customer_name_ar = '';
 	}
 
 	onFileChange = (event)=> {
@@ -231,13 +217,16 @@ export class HomePage {
 
 	selectCustomer = (e)=>{
 		console.log(e);
-		this.customer_info.customer_name = e.value.cus_name;
-		this.customer_info.customer_name_ar = e.value.cus_name_ar;
+		console.log(this.frmVat);
+		this.customers.customer_name = e.value.cus_name;
+		this.customers.customer_name_ar = e.value.cus_name_ar;
+
+		setTimeout(()=>{
+			// this.resetfrmVat();
+		},2000)
 	}
 
   logout = ()=>{
 		this.localStorageService.logout();
   }
 }
-
-1235414

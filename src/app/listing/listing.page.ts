@@ -41,9 +41,6 @@ export class ListingPage implements OnInit {
 		salesRepNumber: 'N/A',
 		agencyCat: 'N/A',
 		images: {
-			BALADIYA_CERT_IMG: this.dummy_img,
-			BR_CR_CERT_IMG: this.dummy_img,
-			COC_CERT_IMG: this.dummy_img,
 			MAIN_CR_CERT_IMG: this.dummy_img,
 			NATIONAL_ADD_IMG: this.dummy_img,
 			VAT_CERT_IMG: this.dummy_img,
@@ -72,6 +69,7 @@ export class ListingPage implements OnInit {
   getCustomers = ()=>{
   	const body = {
   		USER_ID: this.loggedInUser.USER_ID,
+      USER_TYPE: this.loggedInUser.USER_TYPE,
   		REGION: this.loggedInUser.USER_REGION
   	};
 
@@ -96,19 +94,21 @@ export class ListingPage implements OnInit {
 
   initFrmVatUpdate= ()=> {
     this.frmVatUpdate = this.formBuilder.group({
-      customer_name: ['N/A', Validators.required ],
-      customer_name_ar: ['N/A', Validators.required ],
+      cust_name_ar_vat: ['N/A', Validators.required ],
+      cust_business_name_vat: ['N/A', Validators.required ],
       vat: ['N/A', Validators.required ],
       maincr: ['N/A', Validators.required ],
-    });
+      address: ['N/A', Validators.required ],
+    });    
   }
 
   resetFrmVatUpdate = ()=>{
   	this.frmVatUpdate.patchValue({
-  	  customer_name: 'N/A',
-  	  customer_name_ar: 'N/A',
-  	  vat: 'N/A',
-  	  maincr: 'N/A',
+  	  cust_name_ar_vat: 'N/A',
+      cust_business_name_vat: 'N/A',
+      vat: 'N/A',
+      maincr: 'N/A',
+      address: 'N/A',
   	});
 
   	// reset selected customer
@@ -130,23 +130,24 @@ export class ListingPage implements OnInit {
 		this.customer_info.agencyCat = 'N/A';
 	}
 
-  fetchSelectedCustomer = (customer_number)=>{
+  fetchSelectedCustomer = (customer)=>{
+    // console.log(customer_number);
 
-  	this.selected_customer = customer_number;
+  	this.selected_customer = customer;
 
   	let custRow = this.customers_raw.filter((i,v)=>{
-  		return (i.CUST_NUMBER == customer_number);
+  		return (i.CUST_NUMBER == customer.CUST_NUMBER);
   	});
 
-  	console.log(custRow, 'cn');
   	
   	custRow = custRow[0];
-    // return;
-  	this.frmVatUpdate.patchValue({
-      customer_name: (custRow.CUST_NAME) ? custRow.CUST_NAME : 'N/A',
-      customer_name_ar: (custRow.CUST_NAME_AR) ? custRow.CUST_NAME_AR : 'N/A',
-  	  vat: (custRow.VAT_NUM) ? custRow.VAT_NUM : 'N/A',
-  	  maincr: (custRow.MAIN_CR_NUM) ? custRow.MAIN_CR_NUM : 'N/A',
+    
+    this.frmVatUpdate.patchValue({
+      cust_name_ar_vat: (custRow.CUST_NAME_AR_AS_VAT) ? custRow.CUST_NAME_AR_AS_VAT : 'N/A',
+      cust_business_name_vat: (custRow.CUST_BUSSINESS_NAME) ? custRow.CUST_BUSSINESS_NAME : 'N/A',
+      vat: (custRow.VAT_NUM) ? custRow.VAT_NUM : 'N/A',
+      maincr: (custRow.MAIN_CR_NUM) ? custRow.MAIN_CR_NUM : 'N/A',
+      address: (custRow.CUST_ADDRESS) ? custRow.CUST_ADDRESS : 'N/A',
   	});
 
     this.customer_info.division = (custRow.DIVISION) ? custRow.DIVISION : 'N/A';
@@ -157,38 +158,39 @@ export class ListingPage implements OnInit {
 		this.customer_info.salesRepName = (custRow.SALESREP_NAME) ? custRow.SALESREP_NAME : 'N/A';
 		this.customer_info.salesRepNumber = (custRow.SALESREP_NUMBER) ? custRow.SALESREP_NUMBER : 'N/A';
 		this.customer_info.agencyCat = (custRow.AGENCY_CATEGORY) ? custRow.AGENCY_CATEGORY : 'N/A';
-  
+    
+      /*console.log(customer, 'cn');
+      return false;*/
+
 		this.NotificationService.presentLoading();
 
-		const body = {customerNumber: customer_number};
+    const body = {
+      P_CUST_ID: customer.CDC_CUS_ID,
+    };
 
   	this.http.post<any>(`${environment.base_url}/getCustomerImages`, body).subscribe(res => {
 
 			this.NotificationService.dismissLoading();
 			
 			let images = res.data[0];
+      /*console.log(res);
+      return false;*/
 
 			if(res.status=='Success' && res.data.length){
 
 				this.selected_customer_images = true;
 
-				this.customer_info.images.BALADIYA_CERT_IMG = (images.BALADIYA_CERT_IMG) ? `${images.BALADIYA_CERT_IMG}` : this.dummy_img;
-				this.customer_info.images.BR_CR_CERT_IMG = (images.BR_CR_CERT_IMG) ? `${images.BR_CR_CERT_IMG}` : this.dummy_img;
-				this.customer_info.images.COC_CERT_IMG = (images.COC_CERT_IMG) ? `${images.COC_CERT_IMG}` : this.dummy_img;
 				this.customer_info.images.MAIN_CR_CERT_IMG = (images.MAIN_CR_CERT_IMG) ? `${images.MAIN_CR_CERT_IMG}` : this.dummy_img;
 				this.customer_info.images.NATIONAL_ADD_IMG = (images.NATIONAL_ADD_IMG) ? `${images.NATIONAL_ADD_IMG}` : this.dummy_img;
 				this.customer_info.images.VAT_CERT_IMG = (images.VAT_CERT_IMG) ? `${images.VAT_CERT_IMG}` : this.dummy_img;
 
 				this.changeImg(1);
-				console.log(res);
+				// console.log(res);
 			}
 			else{
 				this.NotificationService.alert('Alert', 'No images found');
 
 				this.selected_customer_images = false;
-				this.customer_info.images.BALADIYA_CERT_IMG = this.dummy_img;
-				this.customer_info.images.BR_CR_CERT_IMG = this.dummy_img;
-				this.customer_info.images.COC_CERT_IMG = this.dummy_img;
 				this.customer_info.images.MAIN_CR_CERT_IMG = this.dummy_img;
 				this.customer_info.images.NATIONAL_ADD_IMG = this.dummy_img;
 				this.customer_info.images.VAT_CERT_IMG = this.dummy_img;
@@ -199,38 +201,35 @@ export class ListingPage implements OnInit {
   frmVatUpdateSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
   	
+    console.log(this.selected_customer);
+    // return false;
+
 		if(this.selected_customer==''){
 			this.NotificationService.alert('Alert', 'Please select a customer to update');
 			return false;
 		}
 
-		// console.log(this.frmVatUpdate);
+    const body = {
+      P_USER_ID: this.loggedInUser.USER_ID,
+      P_CUST_ID: this.selected_customer.CDC_CUS_ID, 
+      P_CUST_NUMBER: this.selected_customer.CUST_NUMBER, 
+      P_USER_TYPE: this.loggedInUser.USER_TYPE,
+      P_LATITUDE: null, 
+      P_LONGITUDE: null, 
+      P_VAT_NUM: this.frmVatUpdate.value.vat,
+      P_MAIN_CR_NUM: this.frmVatUpdate.value.maincr, 
+      P_ADDRESS: this.frmVatUpdate.value.address,
+      P_BUSNIESS_NAME: this.frmVatUpdate.value.cust_business_name_vat,
+      P_CUS_NAME_AR_VAT: this.frmVatUpdate.value.cust_name_ar_vat,
+      P_VAT_CERT_IMG: null,
+      P_MAIN_CR_CERT_IMG: null, 
+      P_NATIONAL_ADD_IMG: null,
+      P_CUS_NAME: this.selected_customer.CUST_NAME,
+    }
 
-  	const body = {
-  		P_USER_ID: this.loggedInUser.USER_ID,
-  		// P_CUST_NUMBER: '123411', 
-  		P_CUST_NUMBER: this.selected_customer, 
-  		P_USER_TYPE: this.loggedInUser.USER_TYPE,
-  		P_LATITUDE: 'Null', 
-  		P_LONGITUDE: 'Null', 
-  		P_VAT_NUM: this.frmVatUpdate.value.vat,
-  		P_MAIN_CR_NUM: this.frmVatUpdate.value.maincr, 
-  		P_BR_CR_NUM: null,
-  		P_COC_NUM: null,
-  		P_BALADIYA_NUM: null,
-  		P_VAT_CERT_IMG: 'NULL',
-  		P_MAIN_CR_CERT_IMG: 'NULL', 
-  		P_BR_CR_CERT_IMG: 'NULL',
-  		P_COC_CERT_IMG: 'NULL',
-  		P_BALADIYA_CERT_IMG: 'NULL', 
-  		P_NATIONAL_ADD_IMG: 'NULL',
-      P_CUS_NAME: this.frmVatUpdate.value.customer_name,
-      P_CUS_NAME_AR: this.frmVatUpdate.value.customer_name_ar,
-  	}
-
-  	console.log(body);
-
+    // console.table(body);
   	// return false;
+
 		this.NotificationService.presentLoading();
 
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
@@ -239,9 +238,9 @@ export class ListingPage implements OnInit {
 			
 			if(res.status=='Success'){
 				console.log(res)
+				this.getCustomers();
 				this.NotificationService.alert('Alert', res.data);
 
-				this.getCustomers();
 				this.resetFrmVatUpdate();
 			}
   	});
@@ -251,33 +250,18 @@ export class ListingPage implements OnInit {
  		
  		switch(img_counter) {
   	  case 1:
-  	  	this.image_switcher.path =	this.customer_info.images.BALADIYA_CERT_IMG;
-  	  	this.image_switcher.title = 'Baldiya Certificate';
-  			break;
-
-  	  case 2:
-  	  	this.image_switcher.path =	this.customer_info.images.BR_CR_CERT_IMG;
-  	  	this.image_switcher.title = 'Branch Cr_Certificate';
-  			break;
-  	  
-  	  case 3:
   	  	this.image_switcher.path =	this.customer_info.images.MAIN_CR_CERT_IMG;
   	  	this.image_switcher.title = 'Main Cr_Certificate';
   			break;
   	  
-  	  case 4:
+  	  case 2:
   	  	this.image_switcher.path =	this.customer_info.images.NATIONAL_ADD_IMG;
   	  	this.image_switcher.title = 'National Address';
   			break;
   	  
-  	  case 5:
+  	  case 3:
   	  	this.image_switcher.path =	this.customer_info.images.VAT_CERT_IMG;
   	  	this.image_switcher.title = 'VAT Certificate';
-				break;
-  			
-		  case 6:
-		  	this.image_switcher.path =	this.customer_info.images.COC_CERT_IMG;
-		  	this.image_switcher.title = 'COC Certificate';
 				break;
   	}
   }
@@ -294,8 +278,8 @@ export class ListingPage implements OnInit {
   }
 
   changeImgNext = ()=>{
-  	if(this.img_counter >= 6){
-  		this.img_counter = 6;
+  	if(this.img_counter >= 3){
+  		this.img_counter = 3;
   	}
   	else{
   		this.img_counter++;
