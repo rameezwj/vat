@@ -63,6 +63,17 @@
 
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="floating">Scan VAT</ion-label>
+            <ion-input type="text" fformControlName="vat"></ion-input>
+          </ion-item>
+
+          <div>
+            <ion-icon name="camera" (click)="openModal()"></ion-icon>
+          </div>
+        </div>
+
+        <div class="cform-group widthb100">
+          <ion-item>
             <ion-label position="floating">CR #</ion-label>
             <ion-input type="text" formControlName="maincr"></ion-input>
           </ion-item>

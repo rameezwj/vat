@@ -2954,3 +2954,9 @@ ion-input[type='file'].ng-valid ~ ion-icon {
 	}
 }
 /*body{ display: none; }*/
+
+zxing-scanner{
+	video{
+		height: 100% !important;
+	}
+}

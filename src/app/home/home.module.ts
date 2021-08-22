@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicSelectableModule } from 'ionic-selectable';
+import {QrScannerPageModule} from './qr-scanner/qr-scanner.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { IonicSelectableModule } from 'ionic-selectable';
     IonicModule,
     HomePageRoutingModule,
     HttpClientModule,
-    IonicSelectableModule
+    IonicSelectableModule,
+    QrScannerPageModule
   ],
   declarations: [HomePage]
 })

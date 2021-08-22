@@ -8,7 +8,8 @@ import {LocalStorageService} from '../services/local-storage.service';
 import {NotificationService} from '../services/notification.service';
 import {IonicSelectableComponent} from 'ionic-selectable';
 import {environment} from '../../environments/environment';
-
+import {ModalController, ToastController, AlertController, LoadingController} from '@ionic/angular';
+import {QrScannerPage} from './qr-scanner/qr-scanner.page';
 
 @Component({
   selector: 'app-home',
@@ -23,13 +24,15 @@ export class HomePage {
 	
 	file_names: any = {'file_vat': '', 'file_maincr': '', 'file_branchcr': '', 'file_coc': '', 'file_baldiya': ''};
 
-	constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService) {
+	constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService, public modalController: ModalController) {
 
 		this.loggedInUser = this.localStorageService.getItem('user_info');
 
 		// console.log(this.loggedInUser);
 
 		this.getCustomers();
+
+		// this.openModal();
 	}
 
 	ngOnInit() {
@@ -228,5 +231,13 @@ export class HomePage {
 
   logout = ()=>{
 		this.localStorageService.logout();
+  }
+
+  async openModal() {
+			const modal = await this.modalController.create({
+			component: QrScannerPage,
+			cssClass: 'qr-modal',
+		});
+		return await modal.present();
   }
 }
