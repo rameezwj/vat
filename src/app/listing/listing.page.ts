@@ -58,12 +58,19 @@ export class ListingPage implements OnInit {
   constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService, public sanitizer: DomSanitizer) {
 
   	this.loggedInUser = this.localStorageService.getItem('user_info');
-
-  	this.getCustomers();
   }
 
   ngOnInit() {
   	this.initFrmVatUpdate();
+  }
+
+  ionViewDidEnter(){
+
+    this.initFrmVatUpdate();
+    
+    setTimeout(()=>{
+      this.getCustomers();
+    },1000)
   }
 
   getCustomers = ()=>{
@@ -73,11 +80,13 @@ export class ListingPage implements OnInit {
   		REGION: this.loggedInUser.USER_REGION
   	};
 
-  	// this.NotificationService.presentLoading();;;
+  	this.NotificationService.presentLoading('Fetching Customers...');;;
 
   	this.http.post<any>(`${environment.base_url}/getCustomers`, body).subscribe(res => {
 
-			// this.NotificationService.dismissLoading();;;
+      setTimeout(()=>{
+        this.NotificationService.dismissLoading();;;
+      }, 1000);
 			
 			if(res.status=='Success' && res.data.length > 0){
 				this.customers_raw = res.data;
@@ -159,10 +168,7 @@ export class ListingPage implements OnInit {
 		this.customer_info.salesRepNumber = (custRow.SALESREP_NUMBER) ? custRow.SALESREP_NUMBER : 'N/A';
 		this.customer_info.agencyCat = (custRow.AGENCY_CATEGORY) ? custRow.AGENCY_CATEGORY : 'N/A';
     
-      /*console.log(customer, 'cn');
-      return false;*/
-
-		// this.NotificationService.presentLoading();;;
+		this.NotificationService.presentLoading();;;
 
     const body = {
       P_CUST_ID: customer.CDC_CUS_ID,
@@ -170,8 +176,10 @@ export class ListingPage implements OnInit {
 
   	this.http.post<any>(`${environment.base_url}/getCustomerImages`, body).subscribe(res => {
 
-			// this.NotificationService.dismissLoading();;;
-			
+      setTimeout(()=>{
+        this.NotificationService.dismissLoading();;;
+      }, 1000)
+
 			let images = res.data[0];
       /*console.log(res);
       return false;*/
@@ -201,14 +209,13 @@ export class ListingPage implements OnInit {
   frmVatUpdateSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
   	
-    console.log(this.selected_customer);
-    // return false;
-
-		if(this.selected_customer==''){
+    if(this.selected_customer==''){
 			this.NotificationService.alert('Alert', 'Please select a customer to update');
 			return false;
 		}
 
+		this.NotificationService.presentLoading();;;
+    
     const body = {
       P_USER_ID: this.loggedInUser.USER_ID,
       P_CUST_ID: this.selected_customer.CDC_CUS_ID, 
@@ -227,21 +234,26 @@ export class ListingPage implements OnInit {
       P_CUS_NAME: this.selected_customer.CUST_NAME,
     }
 
-    // console.table(body);
-  	// return false;
-
-		this.NotificationService.presentLoading();;;
-
+    console.table(body);
+  	
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
-			this.NotificationService.dismissLoading();;;
+			setTimeout(()=>{
+        this.NotificationService.dismissLoading();;;
+      }, 500);
 			
 			if(res.status=='Success'){
 				console.log(res)
-				this.getCustomers();
-				this.NotificationService.alert('Alert', res.data);
+				// this.resetFrmVatUpdate();
+				
+        setTimeout(()=>{
+          this.NotificationService.toast(`${res.data}`);
+        }, 600);
 
-				this.resetFrmVatUpdate();
+        setTimeout(()=>{
+          location.reload(true);
+        }, 2000);
+
 			}
   	});
   }

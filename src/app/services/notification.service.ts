@@ -8,6 +8,16 @@ export class NotificationService {
 
   constructor(private modalController: ModalController, private alertController: AlertController, private toastController: ToastController, private loadingController: LoadingController) { }
 
+  async toast(msg, header = 'success', duration = 2000) {
+    const toast = await this.toastController.create({
+        message: msg,
+        duration: duration,
+        color: header === 'Error' ? 'danger' : 'success',
+        position: 'middle',
+    });
+    toast.present();
+  }
+
   async alert(header, msg, action = null, requestBy = null) {
       if(requestBy !== 'auto-save') {
           const alert = await this.alertController.create({
@@ -26,10 +36,10 @@ export class NotificationService {
       }
   }
   
-  async presentLoading(requestBy = null) {
+  async presentLoading(message='Please wait...') {
     const loading = await this.loadingController.create({
       cssClass: 'c_loader',
-      message: 'Please wait...',
+      message: message,
     });
     await loading.present();
   }

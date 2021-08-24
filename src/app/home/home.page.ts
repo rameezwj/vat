@@ -29,28 +29,31 @@ export class HomePage {
 		this.loggedInUser = this.localStorageService.getItem('user_info');
 
 		// console.log(this.loggedInUser);
-
-		this.getCustomers();
-
-		// this.openModal();
 	}
 
 	ngOnInit() {
-		setTimeout(()=>{
+		this.initFrmVat();
+	}
 
-		}, 5000)
+	ionViewDidEnter(){
 
 		this.initFrmVat();
+		
+		setTimeout(()=>{
+			this.getCustomers();
+		},1000)
 	}
 
   frmVatSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
   		
-  	if(false){
-		// if(this.frmVat.status!='VALID'){
+  	// if(false){
+		if(this.frmVat.status!='VALID'){
 			this.NotificationService.alert('Alert', 'All fields are mandatory');
 			return false;
 		}
+
+		this.NotificationService.presentLoading();;;
 
   	const body = {
   		P_USER_ID: this.loggedInUser.USER_ID,
@@ -72,17 +75,23 @@ export class HomePage {
 
   	console.log(body);
 
-  	// return false;
-		this.NotificationService.presentLoading();;;
-
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
-			this.NotificationService.dismissLoading();;;
+  		setTimeout(()=>{
+				this.NotificationService.dismissLoading();;;
+  		}, 500);
 			
 			if(res.status=='Success'){
 				console.log(res)
-				this.resetfrmVat();
-				this.NotificationService.alert('Alert', res.data);
+				// this.resetfrmVat();
+
+				setTimeout(()=>{
+					this.NotificationService.toast(`${res.data}`);
+				}, 600);
+
+				setTimeout(()=>{
+					location.reload(true);
+				}, 2000);
 			}
   	});
   }
@@ -119,6 +128,9 @@ export class HomePage {
 	}
 
 	onFileChange = (event)=> {
+
+		this.NotificationService.presentLoading();
+
 		const file = (event.target as HTMLInputElement).files[0];
 		const imgBase64 = this.convertToBase64(file, event.target.name);
 
@@ -127,6 +139,7 @@ export class HomePage {
 	}
 	
 	convertToBase64 = (file: File, name)=> {
+
 		const observable = new Observable((subscriber: Subscriber<any>)=>{
 			this.readFile(file, name, subscriber);
 		});
@@ -182,6 +195,11 @@ export class HomePage {
 
 		fileReader.onload=()=>{
 			subscriber.next({base64: fileReader.result, name: name});
+
+			setTimeout(()=>{
+ 				this.NotificationService.dismissLoading();;;
+   		}, 1000)
+
 			subscriber.complete();
 		}
 
@@ -197,19 +215,24 @@ export class HomePage {
 			USER_ID: this.loggedInUser.USER_ID
 		};
 		
-		// this.NotificationService.presentLoading();;;
+		this.NotificationService.presentLoading('Fetching Customers...');;;
 		
 		this.http.post<any>(`${environment.base_url}/getSalesCustomers`, body).subscribe(res => {
 		   
-		   // this.NotificationService.dismissLoading();;;
-
-		   if(res.status=='Success' && res.data.length > 0){
+   		setTimeout(()=>{
+ 				this.NotificationService.dismissLoading();;;
+   		}, 1000);
+		  
+		  if(res.status=='Success' && res.data.length > 0){
         
         this.localStorageService.setItem('sales_customers', res.data);
 
         res.data.map((i,v)=>{
         	this.customers.push({cus_id: i.CDC_CUS_ID, cus_number: i.CUST_NUMBER, cus_name: i.CUST_NAME, cus_name_ar: i.CUST_NAME_AR});
         });
+
+        // this.NotificationService.toast('getting data');
+
         // console.log(this.customers, 'ssdsds');
 		   }
 		   else{
@@ -219,14 +242,9 @@ export class HomePage {
 	}
 
 	selectCustomer = (e)=>{
-		console.log(e);
-		console.log(this.frmVat);
+		console.log(e, 'ion selectable');
 		this.customers.customer_name = e.value.cus_name;
 		this.customers.customer_name_ar = e.value.cus_name_ar;
-
-		setTimeout(()=>{
-			// this.resetfrmVat();
-		},2000)
 	}
 
   logout = ()=>{

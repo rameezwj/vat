@@ -17,8 +17,14 @@ table tr td {
   padding: 10px 15px;
   border-bottom: 1px solid #ccc;
   text-align: left;
+  /*transition: all .1s ease-in;*/
+}
+
+table tr:hover {
 
   &:hover{
+    background: var(--tc1);
+    color: #fff;
   	cursor: pointer;
   }
 }
