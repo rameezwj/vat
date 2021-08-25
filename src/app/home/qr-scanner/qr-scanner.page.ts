@@ -18,9 +18,11 @@ export class QrScannerPage implements OnInit {
   onCodeResult(result:string){
 	  this.scanResult = result;
 	  console.log(this.scanResult);
+
+    this.close();
   }
 
   close(){
-    this.modalController.dismiss();
+    this.modalController.dismiss({qr: `${this.scanResult}`});
   }
 }

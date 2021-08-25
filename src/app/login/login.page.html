@@ -9,14 +9,14 @@
 	    <div class="cform-group widthb100">
 	      <ion-item>
 	        <ion-label position="floating">Username</ion-label>
-	        <ion-input type="text" formControlName="username"></ion-input>
+	        <ion-input type="text" formControlName="username" (keyup.enter)="frmLoginSubmit()"></ion-input>
 	      </ion-item>
 	    </div>
 
 	    <div class="cform-group widthb100">
 	      <ion-item>
 	        <ion-label position="floating">Password</ion-label>
-	        <ion-input type="password" formControlName="password"></ion-input>
+	        <ion-input type="password" formControlName="password" (keyup.enter)="frmLoginSubmit()"></ion-input>
 	      </ion-item>
 	    </div>
 

@@ -256,6 +256,15 @@ export class HomePage {
 			component: QrScannerPage,
 			cssClass: 'qr-modal',
 		});
-		return await modal.present();
+
+		await modal.present();
+		modal.onDidDismiss().then((res) => {
+
+			this.frmVat.patchValue({
+			  vat: res.data.qr,
+			});
+
+		  console.log(res.data.qr)
+		});
   }
 }

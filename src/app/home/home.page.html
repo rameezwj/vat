@@ -19,6 +19,7 @@
               itemTextField="cus_number"
               [canSearch]="true"
               (onChange)="selectCustomer($event)"
+              [hasVirtualScroll]="true"
               >
 
               <ng-template ionicSelectableCloseButtonTemplate>
@@ -52,7 +53,7 @@
         <div class="cform-group widthb100">
           <ion-item>
             <ion-label position="floating">VAT</ion-label>
-            <ion-input type="text" formControlName="vat"></ion-input>
+            <ion-input type="text" formControlName="vat" (click)="openModal()"></ion-input>
           </ion-item>
 
           <div>
@@ -61,7 +62,7 @@
           </div>
         </div>
 
-        <div class="cform-group widthb100">
+        <div class="cform-group widthb100 dn">
           <ion-item>
             <ion-label position="floating">qr (testing)</ion-label>
             <ion-input type="text" readonly fformControlName="vat"></ion-input>
