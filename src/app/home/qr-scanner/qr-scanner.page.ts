@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ModalController, ToastController, AlertController, LoadingController} from '@ionic/angular';
 
 @Component({
   selector: 'app-qr-scanner',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QrScannerPage implements OnInit {
 
-	scanResult: any='';
+	scanResult: any='Scanning...';
   
-  constructor() { }
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -17,5 +18,9 @@ export class QrScannerPage implements OnInit {
   onCodeResult(result:string){
 	  this.scanResult = result;
 	  console.log(this.scanResult);
+  }
+
+  close(){
+    this.modalController.dismiss();
   }
 }
