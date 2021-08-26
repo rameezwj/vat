@@ -53,23 +53,13 @@
         <div class="cform-group widthb100">
           <ion-item>
             <ion-label position="floating">VAT</ion-label>
-            <ion-input type="text" formControlName="vat" (click)="openModal()"></ion-input>
+            <ion-input type="text" formControlName="vat"></ion-input>
           </ion-item>
 
           <div>
             <ion-input type="file" name="file_vat" formControlName="file_vat" (change)="onFileChange($event)"></ion-input>
             <ion-icon name="camera"></ion-icon>
-          </div>
-        </div>
-
-        <div class="cform-group widthb100 dn">
-          <ion-item>
-            <ion-label position="floating">qr (testing)</ion-label>
-            <ion-input type="text" readonly fformControlName="vat"></ion-input>
-          </ion-item>
-
-          <div>
-            <ion-icon name="camera" (click)="openModal()"></ion-icon>
+            <ion-icon name="scan-circle-sharp" (click)="openModal()" style="right: 60px;"></ion-icon>
           </div>
         </div>
 
@@ -99,7 +89,7 @@
 
         <div class="cform-group widthb100">
           <ion-item>
-            <ion-label position="floating"> Address </ion-label>
+            <ion-label position="floating"> Address <b class="tc1">(As per VAT)</b> </ion-label>
             <ion-input type="text" formControlName="address"></ion-input>
           </ion-item>
         </div>
