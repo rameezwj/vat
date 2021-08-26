@@ -97,9 +97,10 @@
 					<table class="widthb100">
 						<thead>
 							<tr>
-								<th class="widthb30"> Cust. Number </th>
-								<th class="widthb50"> Cust. Name </th>
-								<th class="widthb20"> Region  </th>
+								<th class="widthb20"> Customer <br /> Number </th>
+								<th class="widthb30"> Customer <br /> Name </th>
+								<th class="widthb15"> Customer <br /> Region </th>
+								<th class="widthb25"> Submitted <br /> Date </th>
 							</tr>
 						</thead>
 					</table>
@@ -115,21 +116,30 @@
 							</thead> -->
 							<tbody>
 								<tr *ngFor="let customer of customersFilterData" (click)="fetchSelectedCustomer(customer)">
-									<td class="widthb30">
+									<td class="widthb20">
 										<span>
 											{{customer.CUST_NUMBER}}
 										</span>
 									</td>
 
-									<td class="widthb50">
+									<td class="widthb30">
 										<span>
 											{{customer.CUST_NAME}}
 										</span>
 									</td>
 
-									<td class="widthb20">
+									<td class="widthb15">
 										<span>
 											{{customer.REGION}}
+										</span>
+									</td>
+
+									<td class="widthb25">
+										<span>
+											{{moment(customer.SALES_SUBMITTED_DATETIME).format('MMM Do YYYY')}}
+										</span>
+										<span class="db tc1">
+											{{moment(customer.SALES_SUBMITTED_DATETIME).format('h:mm a')}}
 										</span>
 									</td>
 								</tr>

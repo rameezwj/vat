@@ -14,17 +14,19 @@ table tr th{
 table tr th,
 table tr td {
   font-size: 15px;
+  line-height: 17px;
   padding: 10px 15px;
   border-bottom: 1px solid #ccc;
   text-align: left;
+  vertical-align: middle;
   /*transition: all .1s ease-in;*/
 }
 
 table tr:hover {
 
-  &:hover{
+  *{
     background: var(--tc1);
-    color: #fff;
+    color: #fff !important;
   	cursor: pointer;
   }
 }

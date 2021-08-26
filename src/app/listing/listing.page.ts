@@ -11,6 +11,7 @@ import {IonicSelectableComponent} from 'ionic-selectable';
 import { map } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {environment} from '../../environments/environment';
+import * as moment from 'moment';
 
 // import dummy from './dummy.json';
 
@@ -21,6 +22,7 @@ import {environment} from '../../environments/environment';
 })
 export class ListingPage implements OnInit {
 
+  moment: any = moment;
 	// 
 		dummy_img = '../../assets/placeholder-image.png';
 	// 
