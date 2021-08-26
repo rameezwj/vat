@@ -64,26 +64,31 @@ export class LoginPage implements OnInit {
 		
 		this.http.post<any>(`${environment.base_url}/login`, body).subscribe(res => {
 		   
-		   this.NotificationService.dismissLoading();
+      setTimeout(()=>{
+        this.NotificationService.dismissLoading();;;
+      }, 100);
 
 		   console.log(res);
 
-		   if(res.status=='Success'){
+		  if(res.status=='Success'){
         this.localStorageService.setItem('status_login', '1');
 		   	this.localStorageService.setItem('user_info', res.data);
 
         let user_type = res.data.USER_TYPE;
 
-        if(user_type=='SALESPERSON'){
-          this.router.navigate(["/home"]);
-        }
-        else{
-        	this.router.navigate(["/listing"]);
-        }
-		   }
-		   else{
+        setTimeout(()=>{
+          if(user_type=='SALESPERSON'){
+            this.router.navigate(["/home"]);
+          }
+          else{
+          	this.router.navigate(["/listing"]);
+          }
+        }, 400);
+
+		  }
+		  else{
 		   	this.NotificationService.alert('Alert', 'Please enter valid crendetials');
-		   }
+		  }
 		});
   }
 }

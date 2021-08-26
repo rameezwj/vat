@@ -46,8 +46,8 @@ export class HomePage {
 
   frmVatSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
-  		
-  	// if(false){
+  	
+		// if(false){
 		if(this.frmVat.status!='VALID'){
 			this.NotificationService.alert('Alert', 'All fields are mandatory');
 			return false;
@@ -83,15 +83,16 @@ export class HomePage {
 			
 			if(res.status=='Success'){
 				console.log(res)
-				// this.resetfrmVat();
+				this.resetfrmVat();
 
 				setTimeout(()=>{
-					this.NotificationService.toast(`${res.data}`);
-				}, 600);
+					this.router.navigate(['/splash', {'message': `${res.data}`}]);
+					// this.NotificationService.toast(`${res.data}`);
+				}, 800);
 
-				setTimeout(()=>{
+				/*setTimeout(()=>{
 					location.reload(true);
-				}, 2000);
+				}, 2000);*/
 			}
   	});
   }

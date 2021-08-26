@@ -183,3 +183,12 @@ ion-slides{
     z-index: 2;
 	}
 }
+
+.cform-group{
+	ion-item{
+		ion-label{
+			width: max-content;
+			max-width: none;
+		}
+	}
+}

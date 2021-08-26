@@ -89,6 +89,7 @@ export class ListingPage implements OnInit {
       }, 1000);
 			
 			if(res.status=='Success' && res.data.length > 0){
+        console.log(res.data);
 				this.customers_raw = res.data;
 				this.customersFilterData = res.data;
 
@@ -244,16 +245,16 @@ export class ListingPage implements OnInit {
 			
 			if(res.status=='Success'){
 				console.log(res)
-				// this.resetFrmVatUpdate();
+				this.resetFrmVatUpdate();
 				
         setTimeout(()=>{
-          this.NotificationService.toast(`${res.data}`);
+          this.router.navigate(['/splash', {'message': `${res.data}`}]);
+          // this.NotificationService.toast(`${res.data}`);
         }, 600);
 
-        setTimeout(()=>{
+        /*setTimeout(()=>{
           location.reload(true);
-        }, 2000);
-
+        }, 2000);*/
 			}
   	});
   }

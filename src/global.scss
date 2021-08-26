@@ -2848,6 +2848,7 @@ body{
 
 	ion-item{
 		--padding-start: 0;
+		--highlight-background: transparent;
 
 		&> span{
 			display: block;
@@ -2964,4 +2965,8 @@ zxing-scanner{
 .qr-modal{
   --width: 100%;
   --height: 100%;
+}
+
+.ct_wrap{
+	background: url('./assets/bg.jpg');
 }

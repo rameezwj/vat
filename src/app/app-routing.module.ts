@@ -25,6 +25,10 @@ const routes: Routes = [
     loadChildren: () => import('./listing/listing.module').then( m => m.ListingPageModule),
     canActivate: [AuthGuardService]
   },
+  {
+    path: 'splash',
+    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
+  },
 ];
 
 @NgModule({

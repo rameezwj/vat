@@ -8,7 +8,7 @@ import {ModalController, ToastController, AlertController, LoadingController} fr
 })
 export class QrScannerPage implements OnInit {
 
-	scanResult: any='Scanning...';
+	scanResult: any = '';
   
   constructor(public modalController: ModalController) { }
 
