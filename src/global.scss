@@ -2954,6 +2954,18 @@ ion-input[type='file'].ng-valid ~ ion-icon {
 		margin-left: 10px;
 	}
 }
+.btn_primary.red{
+	span{
+		color: #f11919;
+	}
+
+	ion-icon{
+		color: #f11919;
+	}
+}
+.btn_primary:hover{
+	opacity: .8;
+}
 /*body{ display: none; }*/
 
 zxing-scanner{

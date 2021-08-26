@@ -1,7 +1,21 @@
 <ion-content class="ct_wrap">
   <div class="bctc1 relative" style="border-radius: 0 0 50px 50px; padding: 0 0 20px 0; margin-bottom: 50px;">
+    <b style="color: #fff; position: absolute; top: 20px; left: 20px;"> ID : {{loggedInUser.USER_ID}} </b>
     <img src="../assets/logo-white.png" class="db" style="max-width: 320px; margin: 0 auto;" />
-    <a (click)="logout()" class="tcw mr5" style="position: absolute; top: 20px; right: 20px;"> Logout </a>
+    <a (click)="logout()" class="tcw mr0" style="position: absolute; top: 20px; right: 20px;"> Logout </a>
+
+    <!-- <ion-list>
+      <ion-item>
+        <ion-label>Action Sheet</ion-label>
+        <ion-select interface="action-sheet" placeholder="Select One">
+          <ion-select-option value="red">Red</ion-select-option>
+          <ion-select-option value="purple">Purple</ion-select-option>
+          <ion-select-option value="yellow">Yellow</ion-select-option>
+          <ion-select-option value="orange">Orange</ion-select-option>
+          <ion-select-option value="green">Green</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list> -->
   </div>
 
   <div class="df aic jcc">

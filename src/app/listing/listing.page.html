@@ -3,8 +3,8 @@
 	  <img src="../assets/logo-white.png" class="db" />
 
 	  <div>
-	  	<a (click)="logout()" class="tcw mr5"> {{loggedInUser.USER_TYPE}} <ion-icon name="log-out"></ion-icon> Logout </a>
-	  </div>
+	  	<a (click)="logout()" class="tcw mr5"> ID : {{loggedInUser.USER_ID}} | {{loggedInUser.USER_TYPE}} <ion-icon name="log-out"></ion-icon> Logout </a>
+    </div>
 	</div>
 
   <div class="df aic jcc">
@@ -148,9 +148,15 @@
 						<p class="mt1 tc3" *ngIf="customers_found_status"> No customers found for updation. </p>
 					</div>
 
-					<div class="widthb100 df jcfe aic btn_primary" style="" (click)="frmVatUpdateSubmit()">
-					  <span> Update </span>
-					  <ion-icon name="chevron-forward-circle"></ion-icon>
+					<div class="df jcfe">
+						<div class="df jcfe aic btn_primary mr1" style="" (click)="frmVatUpdateSubmit()">
+						  <span> Update </span>
+						  <ion-icon name="chevron-forward-circle"></ion-icon>
+						</div>
+						<div class="df jcfe aic btn_primary red">
+						  <span> Reject </span>
+						  <ion-icon name="close-circle"></ion-icon>
+						</div>
 					</div>
 				</div>
 
