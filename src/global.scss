@@ -2833,11 +2833,36 @@ body{
 	}
 }
 
+.lbl_wrap{
+	margin: 0 0 0px 0;
+	width: 100%;
+	display: block;
+	position: relative;
+	overflow: hidden;
+
+	label{
+		/*display: block;
+		width: 100%;*/
+		font-size: 15px !important;
+    color: var(--tc3) !important;
+    margin-bottom: 5px;
+    line-height: 17px;
+    float: left;
+	}
+
+	label:nth-child(2){
+		text-align: right;
+		font-family: 'Tajawal', sans-serif;
+		font-size: 13px !important;
+		font-weight: bold;
+		float: right;
+	}
+}
 .cform-group{
 	position: relative;
 	padding: 0 15px;
 	display: inline-block;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	background: #fff;
 
 	ion-label{

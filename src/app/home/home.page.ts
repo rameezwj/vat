@@ -21,7 +21,8 @@ export class HomePage {
 	loggedInUser: any;
 	frmVat: FormGroup;
 	customers: any = [];
-	
+	allowed_file_types = ['jpg', 'JPG', 'png' ,'PNG' ,'jpeg' ,'JPEG'];
+
 	file_names: any = {'file_vat': '', 'file_maincr': '', 'file_branchcr': '', 'file_coc': '', 'file_baldiya': ''};
 
 	constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService, public modalController: ModalController) {
@@ -130,11 +131,22 @@ export class HomePage {
 
 	onFileChange = (event)=> {
 
-		this.NotificationService.presentLoading();
+		// validation
+			const name = event.target.files[0].name;
+		  const lastDot = name.lastIndexOf('.');
+		  const ext = name.substring(lastDot + 1);
 
+		  if(!(this.allowed_file_types.includes(ext))){
+		  	this.NotificationService.alert('Alert', 'Please upload an image file');
+		  	return false;
+		  }
+		// validation
+
+		this.NotificationService.presentLoading();
+		
 		const file = (event.target as HTMLInputElement).files[0];
 		const imgBase64 = this.convertToBase64(file, event.target.name);
-
+		
 		// console.log(file);
 		// console.log(this.file_names)
 	}

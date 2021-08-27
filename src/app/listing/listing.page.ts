@@ -76,6 +76,9 @@ export class ListingPage implements OnInit {
   }
 
   getCustomers = ()=>{
+    this.customers_raw = [],
+    this.customersFilterData = [];
+
   	const body = {
   		USER_ID: this.loggedInUser.USER_ID,
       USER_TYPE: this.loggedInUser.USER_TYPE,
