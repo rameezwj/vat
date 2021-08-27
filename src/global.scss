@@ -2841,8 +2841,6 @@ body{
 	overflow: hidden;
 
 	label{
-		/*display: block;
-		width: 100%;*/
 		font-size: 15px !important;
     color: var(--tc3) !important;
     margin-bottom: 5px;
@@ -2850,11 +2848,10 @@ body{
     float: left;
 	}
 
-	label:nth-child(2){
+	label, label:nth-child(2){
 		text-align: right;
 		font-family: 'Tajawal', sans-serif;
 		font-size: 13px !important;
-		font-weight: bold;
 		float: right;
 	}
 }
@@ -2862,7 +2859,7 @@ body{
 	position: relative;
 	padding: 0 15px;
 	display: inline-block;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	background: #fff;
 
 	ion-label{

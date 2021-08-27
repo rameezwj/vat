@@ -6,7 +6,7 @@
 
     <!-- <ion-list>
       <ion-item>
-        <label>Action Sheet</label>
+        <ion-label>Action Sheet</ion-label>
         <ion-select interface="action-sheet" placeholder="Select One">
           <ion-select-option value="red">Red</ion-select-option>
           <ion-select-option value="purple">Purple</ion-select-option>
@@ -23,11 +23,11 @@
       <form [formGroup]="frmVat">
          
         <div class="lbl_wrap">
-          <label position="floating">Customer #</label>
           <label position="floating"> أختر رقم العميل  </label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="floating">Customer #</ion-label>
             <ionic-selectable
               formControlName="customer_dd"
               item-content
@@ -47,44 +47,43 @@
         </div>
 
         <div class="lbl_wrap">
-          <label position="stacked">Customer Name</label>
+          <label position="floating">سم الزبون  </label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="stacked">Customer Name</ion-label>
             <span> {{customers.customer_name ? customers.customer_name : 'N/A'}} </span>
           </ion-item>
         </div>
 
         <div class="lbl_wrap">
           <label position="floating">
-            Customer Arabic Name <b class="tc1">(As per VAT)</b> <br />
-          </label>
-          <label position="floating">
             أدخل إسم العميل باللغه العربية حسب التسجيل في الضريبه المضافة
           </label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="floating">Customer Arabic Name <b class="tc1">(As per VAT)</b></ion-label>
             <ion-input type="text" formControlName="cust_name_ar_vat"></ion-input>
           </ion-item>
         </div>
 
         <div class="lbl_wrap">
-          <label position="floating">Customer Business name</label>
           <label position="floating"> أدخل إسم العميل باللغه الإنجليزية حسب السجل التجاري  </label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="floating">Customer Business name</ion-label>
             <ion-input type="text" formControlName="cust_business_name_vat"></ion-input>
           </ion-item>
         </div>
 
         <div class="lbl_wrap">
-          <label position="floating">VAT</label>
           <label position="floating"> إرفق شهادة التسجيل في الضريبه المضافة  </label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="floating">VAT</ion-label>
             <ion-input type="text" formControlName="vat" maxlength="15"></ion-input>
           </ion-item>
 
@@ -96,11 +95,11 @@
         </div>
 
         <div class="lbl_wrap">
-          <label position="floating">CR #</label>
           <label position="floating"> إرفق السجل التجاري   </label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="floating">CR #</ion-label>
             <ion-input type="number" formControlName="maincr"></ion-input>
           </ion-item>
 
@@ -111,11 +110,11 @@
         </div>
 
         <div class="lbl_wrap">
-          <label position="floating">National Address</label>
           <label position="floating"> إرفق العنوان الوطني  </label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="floating">National Address</ion-label>
             <ion-input type="hidden" readonly></ion-input>
           </ion-item>
 
@@ -126,11 +125,11 @@
         </div>
 
         <div class="lbl_wrap">
-          <label position="floating"> Address <b class="tc1">(As per VAT)</b> </label>
           <label position="floating"> أدخل العنوان باللغه العربية كما هو بشهادة التسجيل في الضريبه المضافة  </label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
+            <ion-label position="floating"> Address <b class="tc1">(As per VAT)</b> </ion-label>
             <ion-input type="text" formControlName="address"></ion-input>
           </ion-item>
         </div>
