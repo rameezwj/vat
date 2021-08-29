@@ -2937,7 +2937,7 @@ ionic-selectable-modal{
 	}
 }
 
-ion-input[type='file'].ng-valid ~ ion-icon {
+ion-input[type='file'].ng-valid ~ ion-icon:not(.icon_qr) {
   color: var(--tc1);
 }
 

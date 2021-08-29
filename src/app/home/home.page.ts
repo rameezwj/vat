@@ -130,13 +130,29 @@ export class HomePage {
 	}
 
 	onFileChange = (event)=> {
-
 		// validation
 			const name = event.target.files[0].name;
 		  const lastDot = name.lastIndexOf('.');
 		  const ext = name.substring(lastDot + 1);
 
 		  if(!(this.allowed_file_types.includes(ext))){
+
+		  	if(event.target.name=='file_vat'){
+			  	this.frmVat.patchValue({
+			  		file_vat: ''
+			  	});
+			  }
+			  else if(event.target.name=='file_maincr'){
+			  	this.frmVat.patchValue({
+			  		file_maincr: ''
+			  	});
+				}
+			  else if(event.target.name=='file_address'){
+			  	this.frmVat.patchValue({
+			  		file_address: ''
+			  	});
+				}
+
 		  	this.NotificationService.alert('Alert', 'Please upload an image file');
 		  	return false;
 		  }
@@ -249,7 +265,9 @@ export class HomePage {
         // console.log(this.customers, 'ssdsds');
 		   }
 		   else{
-		   	this.NotificationService.alert('Alert', 'No Customer found');
+ 	  		setTimeout(()=>{
+		   		this.NotificationService.alert('Alert', 'No Customer found');
+ 				}, 1500);
 		   }
 		});
 	}
