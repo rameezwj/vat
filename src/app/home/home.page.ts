@@ -48,6 +48,7 @@ export class HomePage {
   frmVatSubmit = ()=>{
   	// const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
   	
+  	// console.log(this.frmVat);
 		// if(false){
 		if(this.frmVat.status!='VALID'){
 			this.NotificationService.alert('Alert', 'All fields are mandatory');
@@ -103,7 +104,7 @@ export class HomePage {
 	    customer_dd: ['', Validators.required ],
 	    cust_name_ar_vat: ['', Validators.required ],
 	    cust_business_name_vat: ['', Validators.required ],
-	    vat: ['', Validators.required ],
+	    vat: ['', Validators.minLength(15) ],
 	    file_vat: ['', Validators.required ],
 	    maincr: ['', Validators.required ],
 	    file_maincr: ['', Validators.required ],
