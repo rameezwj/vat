@@ -112,11 +112,12 @@
 								<th class="widthb30"> Customer <br /> Name </th>
 								<th class="widthb15"> Customer <br /> Region </th>
 								<th class="widthb25"> Sales <br /> Submitted </th>
+								<th class="widthb25"> Customer <br /> City </th>
 							</tr>
 						</thead>
 					</table>
 
-					<div  class="widthb100" style="height: 230px; overflow: auto;">
+					<div  class="widthb100" style="height: 270px; overflow: auto;">
 						<table class="widthb100 table-striped">
 							<!-- <thead>
 								<tr>
@@ -151,6 +152,12 @@
 										</span>
 										<span class="db tc1">
 											{{moment(customer.SALES_SUBMITTED_DATETIME).format('h:mm a')}}
+										</span>
+									</td>
+
+									<td class="widthb15">
+										<span>
+											{{customer.CITY}}
 										</span>
 									</td>
 								</tr>
