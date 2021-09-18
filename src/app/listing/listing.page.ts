@@ -11,6 +11,8 @@ import {IonicSelectableComponent} from 'ionic-selectable';
 import { map } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {environment} from '../../environments/environment';
+import {ModalController, ToastController, AlertController, LoadingController} from '@ionic/angular';
+import {RemarksPage} from './remarks/remarks.page';
 import * as moment from 'moment';
 
 // import dummy from './dummy.json';
@@ -57,7 +59,7 @@ export class ListingPage implements OnInit {
 
 	frmVatUpdate: FormGroup;
 	
-  constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService, public sanitizer: DomSanitizer) {
+  constructor(private router: Router, private formBuilder: FormBuilder, data: DataService, private http: HttpClient, private localStorageService: LocalStorageService, private NotificationService: NotificationService, public sanitizer: DomSanitizer, public modalController: ModalController) {
 
   	this.loggedInUser = this.localStorageService.getItem('user_info');
   }
@@ -94,7 +96,7 @@ export class ListingPage implements OnInit {
       }, 1000);
 			
 			if(res.status=='Success' && res.data.length > 0){
-        console.log(res.data);
+        // console.log(res.data);
 				this.customers_raw = res.data;
 				this.customersFilterData = res.data;
 
@@ -147,8 +149,7 @@ export class ListingPage implements OnInit {
 
   fetchSelectedCustomer = (customer)=>{
     // console.log(customer_number);
-
-  	this.selected_customer = customer;
+    this.selected_customer = customer;
 
   	let custRow = this.customers_raw.filter((i,v)=>{
   		return (i.CUST_NUMBER == customer.CUST_NUMBER);
@@ -240,7 +241,7 @@ export class ListingPage implements OnInit {
       P_CUS_NAME: this.selected_customer.CUST_NAME,
     }
 
-    console.table(body);
+    // console.table(body);
   	
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
@@ -249,7 +250,7 @@ export class ListingPage implements OnInit {
       }, 500);
 			
 			if(res.status=='Success'){
-				console.log(res)
+				// console.log(res)
 				this.resetFrmVatUpdate();
 				
         setTimeout(()=>{
@@ -262,6 +263,38 @@ export class ListingPage implements OnInit {
         }, 2000);*/
 			}
   	});
+  }
+
+  frmVatReject = async ()=> {
+
+    if(false){
+    // if(this.selected_customer==''){
+      this.NotificationService.alert('Alert', 'Please select a customer to reject');
+      return false;
+    }
+
+    // console.log(this.selected_customer, 'ssdsd');
+
+    const rejection_body = {
+      P_USER_ID: this.loggedInUser.USER_ID,
+      P_CUST_ID: this.selected_customer.CDC_CUS_ID,
+    }
+
+    const modal = await this.modalController.create({
+      component: RemarksPage,
+      cssClass: 'remarks-modal',
+      componentProps: {rejection_body: rejection_body}
+    });
+
+    await modal.present();
+    modal.onDidDismiss().then((res) => {
+
+      /*this.frmVat.patchValue({
+        vat: res.data.qr,
+      });
+
+      console.log(res.data.qr)*/
+    });
   }
 
   changeImg = (img_counter)=>{

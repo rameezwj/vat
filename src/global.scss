@@ -117,6 +117,7 @@
 	      --tc1: #15b9ba;
 	      --tc2: #EDEAEA;
 	      --tc3: #848484;
+	      --tcred: #e40000;
 	      --tcb: #000;
 	      --tcw: #fff;
 	    }
@@ -2511,6 +2512,7 @@
 	      .tc7{ color: var(--tc7); }
 	      .tcb{ color: var(--tcb); }
 	      .tcw{ color: #fff; }
+	      .tcred{ color: var(--tcred); }
 
 	      .tbc1{ background-color: var(--tc1); }
 	      .tbc2{ background-color: var(--tc2); }
@@ -2978,11 +2980,12 @@ ion-input[type='file'].ng-valid ~ ion-icon:not(.icon_qr) {
 }
 .btn_primary.red{
 	span{
-		color: #f11919;
+		color: var(--tcred);
+		font-weight: 100;
 	}
 
 	ion-icon{
-		color: #f11919;
+		color: var(--tcred);
 	}
 }
 .btn_primary:hover{
@@ -3003,4 +3006,8 @@ zxing-scanner{
 
 .ct_wrap{
 	background: url('./assets/bg.jpg');
+}
+
+ion-modal.remarks-modal {
+    --height: 325px;
 }

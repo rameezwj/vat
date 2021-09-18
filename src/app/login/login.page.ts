@@ -68,7 +68,7 @@ export class LoginPage implements OnInit {
         this.NotificationService.dismissLoading();;;
       }, 100);
 
-		   console.log(res);
+		   // console.log(res);
 
 		  if(res.status=='Success'){
         this.localStorageService.setItem('status_login', '1');

@@ -19,21 +19,19 @@ export class NotificationService {
   }
 
   async alert(header, msg, action = null, requestBy = null) {
-      if(requestBy !== 'auto-save') {
-          const alert = await this.alertController.create({
-              header,
-              message: msg,
-              buttons: [{
-                  text: 'OK',
-                  handler: data => {
-                      if (action != null) {
-                          action();
-                      }
-                  }
-              }]
-          });
-          await alert.present();
-      }
+    const alert = await this.alertController.create({
+        header,
+        message: msg,
+        buttons: [{
+            text: 'OK',
+            handler: data => {
+              if (action != null) {
+                action();
+              }
+            }
+        }]
+    });
+    await alert.present();
   }
   
   async presentLoading(message='Please wait...') {

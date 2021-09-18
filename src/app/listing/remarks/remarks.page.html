@@ -1,0 +1,28 @@
+<ion-content>
+	<div class="df jcsb p2 tbc1 tcw" style="font-size: 20px;">
+		<span>
+			Rejection Remarks
+		</span>
+		<span>
+			ملاحظات الرفض
+		</span>
+	</div>
+
+	<div class="px1">
+		<div class="cform-group widthb100">
+		  <ion-item>
+		    <ion-label position="floatingx">Remarks</ion-label>
+		    <ion-textarea rows="5" (ionInput)="updateRemarks($event)"></ion-textarea>
+		  </ion-item>
+		</div>
+	</div>
+	<small class="pl2 tc3" style="font-size: 12px;">
+		Press Esc or click outside to cancel.
+	</small>
+	<div class="widhtb100 df jcfe px1">
+		<div class="df jcfe aic btn_primary mr1" style="" (click)="handleRejection()" style="margin-top: 15px; cursor: pointer; border: 1px solid var(--tc1); padding: 5px 10px;">
+		  <span style="font-size: 18px; font-weight: 100;"> Ok </span>
+		  <ion-icon name="checkmark-circle" style="font-size: 30px;"></ion-icon>
+		</div>
+	</div>
+</ion-content>

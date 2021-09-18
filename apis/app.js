@@ -353,6 +353,72 @@ app.use(
   });
 // insert/update vat
 
+// rejection
+  app.post(
+    '/apis/rejection',
+    async function(req, res){
+
+    let P_CUST_ID = `${req.body.P_CUST_ID}`,
+        P_REJECT_REMARKS = req.body.P_REJECT_REMARKS,
+        P_USER_ID = req.body.P_USER_ID;
+
+    /*let P_CUST_ID = '48853',
+        P_REJECT_REMARKS = 'sdsdsd',
+        P_USER_ID = '4754';*/
+
+    // console.log(req.body, 'sdsd');
+    // return false;
+
+    const bindVar = {
+      P_CUST_ID: {type: oracledb.STRING, val: P_CUST_ID, dir: oracledb.BIND_IN},
+      P_REJECT_REMARKS: {type: oracledb.STRING, val: P_REJECT_REMARKS, dir: oracledb.BIND_IN},
+      P_USER_ID: {type: oracledb.STRING, val: P_USER_ID, dir: oracledb.BIND_IN},
+      P_MESSAGE: {type: oracledb.STRING, dir: oracledb.BIND_OUT},
+    }
+
+    console.log(bindVar);
+    
+    try {
+        conn = await oracledb.getConnection(config1);
+
+        let query = `BEGIN PROC_CUSTOMER_REJECT(
+          :P_CUST_ID,
+          :P_REJECT_REMARKS,
+          :P_USER_ID,
+          :P_MESSAGE
+          );
+          END;`;
+
+        const result = await conn.execute(
+          query,
+          bindVar,
+          {outFormat: oracledb.OUT_FORMAT_OBJECT});
+
+        console.log(result);
+
+        res.json({
+          code: 200,
+          data: result.outBinds.P_MESSAGE,
+          status: true ? 'Success' : 'Error'
+        })
+
+      } catch (err) {
+        res.json({
+          code: 400,
+          data: error_type[err.errorNum],
+          status: 'Failed'
+        })
+
+        console.log(err);
+
+      } finally {
+        /*if (conn) {
+          await conn.close()
+        }*/
+      }
+  });
+// rejection
+
 app.get(
   '/apis/v',
   function(req, res){

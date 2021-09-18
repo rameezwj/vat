@@ -75,7 +75,7 @@ export class HomePage {
   		P_CUS_NAME: this.frmVat.value.customer_dd.cus_name,
   	}
 
-  	console.log(body);
+  	// console.log(body);
 
   	this.http.post<any>(`${environment.base_url}/updateVat`, body).subscribe(res => {
 
@@ -84,7 +84,7 @@ export class HomePage {
   		}, 500);
 			
 			if(res.status=='Success'){
-				console.log(res)
+				// console.log(res)
 				this.resetfrmVat();
 
 				setTimeout(()=>{
@@ -274,7 +274,7 @@ export class HomePage {
 	}
 
 	selectCustomer = (e)=>{
-		console.log(e, 'ion selectable');
+		// console.log(e, 'ion selectable');
 		this.customers.customer_name = e.value.cus_name;
 		this.customers.customer_name_ar = e.value.cus_name_ar;
 	}
@@ -296,7 +296,7 @@ export class HomePage {
 			  vat: res.data.qr,
 			});
 
-		  console.log(res.data.qr)
+		  // console.log(res.data.qr)
 		});
   }
 }
