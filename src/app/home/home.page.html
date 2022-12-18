@@ -1,6 +1,6 @@
 <ion-content class="ct_wrap">
   <div class="bctc1 relative" style="border-radius: 0 0 50px 50px; padding: 0 0 20px 0; margin-bottom: 50px;">
-    <b style="color: #fff; position: absolute; top: 20px; left: 20px;"> ID : {{loggedInUser.USER_ID}} </b>
+    <b style="color: #fff; position: absolute; top: 20px; left: 20px;"> ID : {{loggedInUser.userInfo.USER_ID}} </b>
     <img src="../assets/logo-white.png" class="db" style="max-width: 320px; margin: 0 auto;" />
     <a (click)="logout()" class="tcw mr0" style="position: absolute; top: 20px; right: 20px;"> Logout </a>
 
@@ -32,8 +32,8 @@
               formControlName="customer_dd"
               item-content
               [items]="customers"
-              itemValueField="cus_number"
-              itemTextField="cus_number"
+              itemValueField="CUSTOMER_ID"
+              itemTextField="CUST_NUMBER"
               [canSearch]="true"
               (onChange)="selectCustomer($event)"
               [hasVirtualScroll]="true"
@@ -52,7 +52,7 @@
         <div class="cform-group widthb100">
           <ion-item>
             <ion-label position="stacked">Customer Name</ion-label>
-            <span> {{customers.customer_name ? customers.customer_name : 'N/A'}} </span>
+            <ion-input type="text" formControlName="cust_name" disabled></ion-input>
           </ion-item>
         </div>
 
@@ -64,17 +64,7 @@
         <div class="cform-group widthb100">
           <ion-item>
             <ion-label position="floating">Customer Arabic Name <b class="tc1">(As per VAT)</b></ion-label>
-            <ion-input type="text" formControlName="cust_name_ar_vat"></ion-input>
-          </ion-item>
-        </div>
-
-        <div class="lbl_wrap">
-          <label position="floating"> أدخل إسم العميل باللغه الإنجليزية حسب السجل التجاري  </label>
-        </div>
-        <div class="cform-group widthb100">
-          <ion-item>
-            <ion-label position="floating">Customer Business name</ion-label>
-            <ion-input type="text" formControlName="cust_business_name_vat"></ion-input>
+            <ion-input type="text" formControlName="cust_name_ar_vat" disabled></ion-input>
           </ion-item>
         </div>
 
@@ -90,9 +80,58 @@
           <div>
             <ion-input type="file" name="file_vat" formControlName="file_vat" (change)="onFileChange($event)"></ion-input>
             <ion-icon name="camera"></ion-icon>
-            <ion-icon name="scan-circle-sharp" class="icon_qr" (click)="openModal()" style="right: 60px;"></ion-icon>
+            <!-- <ion-icon name="scan-circle-sharp" class="icon_qr" (click)="openModal()" style="right: 60px;"></ion-icon> -->
           </div>
         </div>
+
+        <!--  -->
+        <div class="lbl_wrap">
+          <label position="floating"> NA Province </label>
+        </div>
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating"> NA Province </ion-label>
+            <ionic-selectable
+              item-content
+              formControlName="na_province"
+              [items]="provinces"
+              itemValueField="PROVINCE"
+              itemTextField="PROVINCE"
+              [canSearch]="true"
+              (onChange)="selectProvince($event)"
+              [hasVirtualScroll]="true"
+              >
+
+              <ng-template ionicSelectableCloseButtonTemplate>
+                <ion-icon name="close-circle" class="closebtn ion-select-close"></ion-icon>
+              </ng-template>
+            </ionic-selectable>
+          </ion-item>
+        </div>
+
+        <div class="lbl_wrap">
+          <label position="floating"> NA City </label>
+        </div>
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating"> NA City </ion-label>
+            <ionic-selectable
+              item-content
+              formControlName="na_city"
+              [items]="cities"
+              itemValueField="CITY"
+              itemTextField="CITY"
+              [canSearch]="true"
+              [hasVirtualScroll]="true"
+              >
+
+              <ng-template ionicSelectableCloseButtonTemplate>
+                <ion-icon name="close-circle" class="closebtn ion-select-close"></ion-icon>
+              </ng-template>
+            </ionic-selectable>
+          </ion-item>
+        </div>
+        <!--  -->
 
         <div class="lbl_wrap">
           <label position="floating"> إرفق السجل التجاري   </label>
@@ -100,13 +139,73 @@
         <div class="cform-group widthb100">
           <ion-item>
             <ion-label position="floating">CR #</ion-label>
-            <ion-input type="number" formControlName="maincr"></ion-input>
+            <ion-input type="text" formControlName="maincr"></ion-input>
           </ion-item>
 
           <div>
             <ion-input type="file" name="file_maincr" formControlName="file_maincr" (change)="onFileChange($event)"></ion-input>
             <ion-icon name="camera"></ion-icon>
           </div>
+        </div>
+
+        <div class="lbl_wrap">
+          <label position="floating">NA Street Name</label>
+        </div>
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">NA Street Name</ion-label>
+            <ion-input type="text" formControlName="na_street_name"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="lbl_wrap">
+          <label position="floating">NA Building Number</label>
+        </div>
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">NA Building Number</ion-label>
+            <ion-input type="text" formControlName="na_building_number"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="lbl_wrap">
+          <label position="floating">NA Additional Number</label>
+        </div>
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">NA Additional Number</ion-label>
+            <ion-input type="text" formControlName="na_additional_number"></ion-input>
+          </ion-item>
+        </div>
+        
+        <div class="lbl_wrap">
+          <label position="floating">NA Unit Number</label>
+        </div>
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">NA Unit Number</ion-label>
+            <ion-input type="text" formControlName="na_unit_number"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="lbl_wrap">
+          <label position="floating">NA Postal Code</label>
+        </div>
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">NA Postal Code</ion-label>
+            <ion-input type="text" formControlName="na_postal_code"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="lbl_wrap">
+          <label position="floating">NA District</label>
+        </div>
+        <div class="cform-group widthb100">
+          <ion-item>
+            <ion-label position="floating">NA District</ion-label>
+            <ion-input type="text" formControlName="na_district"></ion-input>
+          </ion-item>
         </div>
 
         <div class="lbl_wrap">
@@ -125,12 +224,12 @@
         </div>
 
         <div class="lbl_wrap">
-          <label position="floating"> أدخل العنوان باللغه العربية كما هو بشهادة التسجيل في الضريبه المضافة  </label>
+          <label position="floating">Remarks</label>
         </div>
         <div class="cform-group widthb100">
           <ion-item>
-            <ion-label position="floating"> Address <b class="tc1">(As per VAT)</b> </ion-label>
-            <ion-input type="text" formControlName="address"></ion-input>
+            <ion-label position="floating">Remarks</ion-label>
+            <ion-input type="text" formControlName="remarks"></ion-input>
           </ion-item>
         </div>
 

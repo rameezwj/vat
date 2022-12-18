@@ -3,7 +3,7 @@
 	  <img src="../assets/logo-white.png" class="db" />
 
 	  <div>
-	  	<a (click)="logout()" class="tcw mr5"> ID : {{loggedInUser.USER_ID}} | {{loggedInUser.USER_TYPE}} <ion-icon name="log-out"></ion-icon> Logout </a>
+	  	<a (click)="logout()" class="tcw mr5"> ID : {{loggedInUser.userInfo.USER_ID}} | {{loggedInUser.userInfo.USER_TYPE}} <ion-icon name="log-out"></ion-icon> Logout </a>
     </div>
 	</div>
 
@@ -11,213 +11,249 @@
     <div class="listing_wrapper mx-auto" style="width: 90%; height: 100%;">
 
     	<div>
-				<form [formGroup]="frmVatUpdate">
-					<div class="widthb100 df fww jcsb ccard pt0 tl0 pb1 pr0 mt2 mb1">
-						<div class="cform-group widthb20">
-						  <ion-item>
-						    <ion-label position="floating">Customer Arabic Name <b class="tc1">(As per VAT)</b></ion-label>
-						    <ion-input type="text" formControlName="cust_name_ar_vat"></ion-input>
-						  </ion-item>
-						</div>
-
-						<div class="cform-group widthb20">
-						  <ion-item>
-						    <ion-label position="floating">Customer Business name</ion-label>
-						    <ion-input type="text" formControlName="cust_business_name_vat"></ion-input>
-						  </ion-item>
-						</div>
-
-						<div class="cform-group widthb20">
-						  <ion-item>
-						    <ion-label position="floating">VAT</ion-label>
-						    <ion-input type="text" formControlName="vat"></ion-input>
-						  </ion-item>
-						</div>
-
-	  				<div class="cform-group widthb20">
-	  				  <ion-item>
-	  				    <ion-label position="floating">CR #</ion-label>
-	  				    <ion-input type="text" formControlName="maincr"></ion-input>
-	  				  </ion-item>
-	  				</div>
-
-	  				<div class="cform-group widthb20">
-	  				  <ion-item>
-	  				    <ion-label position="floating"> Address <b class="tc1">(As per VAT)</b> </ion-label>
-	  				    <ion-input type="text" formControlName="address"></ion-input>
-	  				  </ion-item>
-	  				</div>
-
-	  				<!-- <div class="cust_info"> -->
-		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> Customer # </b>: {{selected_customer!='' ? selected_customer.CUST_NUMBER : 'N/A' }} </span>
-		  				</div>
-
-		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> Division</b>: {{customer_info.division}} </span>
-		  				</div>
-
-		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> Sub-Division</b>: {{customer_info.subdivision}} </span>
-		  				</div>
-
-		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> Classification</b>: {{customer_info.classification}} </span>
-		  				</div>
-
-		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> City</b>: {{customer_info.city}} </span>
-		  				</div>
-
-		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> Sales Rep. Name</b>: {{customer_info.salesRepName}} </span>
-		  				</div>
-
-		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> Sales Rep Number</b>: {{customer_info.salesRepNumber}} </span>
-		  				</div>
-
-		  				<div class="cform-group widthb24 dib cust_info">
-	  				  	<span> <b class="tc1"> Agency Category</b>: {{customer_info.agencyCat}} </span>
-		  				</div>
-		  			<!-- </div> -->
-
-		  			<div class="df jcfe widthb100">
-		  				<div class="df jcfe aic btn_primary mr1" style="" (click)="frmVatUpdateSubmit()" style="margin-top: 15px; cursor: pointer; border: 1px solid var(--tc1); padding: 5px 10px;">
-		  				  <span style="font-size: 18px;"> Submit & Send </span>
-		  				  <ion-icon name="chevron-forward-circle" style="font-size: 30px;"></ion-icon>
-		  				</div>
-		  				<!-- <div class="dndf jcfe aic btn_primary red">
-		  				  <span> Reject </span>
-		  				  <ion-icon name="close-circle"></ion-icon>
-		  				</div> -->
-		  			</div>
+			<form [formGroup]="frmVatUpdate">
+				<div class="widthb100 df fww jcsb ccard pt0 tl0 pb1 pr0 mt2 mb1">
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">Customer ID</ion-label>
+						<ion-input type="text" formControlName="customer_id" disabled></ion-input>
+						</ion-item>
 					</div>
-				</form>
-			</div>
-
-			<div class="ccard mb2 ofh">
-				<!-- <h1> Customer Number </h1> -->
-				<div class="p1 fl" style="width: calc( 100% - 550px );">
-					<div class="cform-group widthb100 dib item_search">
-					  <ion-item>
-					    <ion-label position="floating">Search by Customer#</ion-label>
-					    <ion-input type="text" (ionChange)="filterPackets($any($event.target).value)"></ion-input>
-					  </ion-item>
+					
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">Customer #</ion-label>
+						<ion-input type="text" formControlName="customer_no" disabled></ion-input>
+						</ion-item>
 					</div>
-					<table class="widthb100">
-						<thead>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">Customer Name</ion-label>
+						<ion-input type="text" formControlName="cust_name" disabled></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">Customer Name AR</ion-label>
+						<ion-input type="text" formControlName="cust_name_ar_vat"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">VAT#</ion-label>
+						<ion-input type="text" formControlName="vat"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">NA Province</ion-label>
+						<ion-input type="text" formControlName="na_province"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">NA City</ion-label>
+						<ion-input type="text" formControlName="na_city"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">CR#</ion-label>
+						<ion-input type="text" formControlName="maincr"></ion-input>
+						</ion-item>
+					</div>
+					
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">NA Street Name</ion-label>
+						<ion-input type="text" formControlName="na_street_name"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">NA Building Number</ion-label>
+						<ion-input type="text" formControlName="na_building_number"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">NA Additional Number</ion-label>
+						<ion-input type="text" formControlName="na_additional_number"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">NA Unit Number</ion-label>
+						<ion-input type="text" formControlName="na_unit_number"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">NA Postal Code</ion-label>
+						<ion-input type="text" formControlName="na_postal_code"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">NA District</ion-label>
+						<ion-input type="text" formControlName="na_district"></ion-input>
+						</ion-item>
+					</div>
+
+					<div class="cform-group widthb20">
+						<ion-item>
+						<ion-label position="floating">Remarks</ion-label>
+						<ion-input type="text" formControlName="remarks"></ion-input>
+						</ion-item>
+					</div>
+
+				<div class="df jcfe widthb100">
+					<div class="df jcfe aic btn_primary mr1" (click)="frmVatUpdateSubmit()" style="margin-top: 15px; cursor: pointer; border: 1px solid var(--tc1); padding: 5px 10px;">
+						<span style="font-size: 18px;"> Submit & Send </span>
+						<ion-icon name="chevron-forward-circle" style="font-size: 30px;"></ion-icon>
+					</div>
+					<div class="df jcfe aic btn_primary red mr1" (click)="frmVatRejectSubmit()"style="margin-top: 15px; cursor: pointer; border: 1px solid red; padding: 5px 10px;">
+						<span style="font-size: 18px;"> Reject </span>
+						<ion-icon name="close-circle" style="font-size: 30px;"></ion-icon>
+					</div>
+				</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="ccard mb2 ofh">
+			<!-- <h1> Customer Number </h1> -->
+			<div class="p1 fl" style="width: calc( 100% - 550px );">
+				<div class="cform-group widthb100 dib item_search">
+					<ion-item>
+					<ion-label position="floating">Search by Customer#</ion-label>
+					<ion-input type="text" (ionChange)="filterPackets($any($event.target).value)"></ion-input>
+					</ion-item>
+				</div>
+				<table class="widthb100">
+					<thead>
+						<tr>
+							<th class="widthb20"> Customer <br /> Number </th>
+							<th class="widthb30"> Customer <br /> Name </th>
+							<th class="widthb15"> Customer <br /> Region </th>
+							<th class="widthb25"> Sales <br /> Submitted </th>
+						</tr>
+					</thead>
+				</table>
+
+				<div  class="widthb100" style="height: 230px; overflow: auto;">
+					<table class="widthb100 table-striped">
+						<!-- <thead>
 							<tr>
-								<th class="widthb20"> Customer <br /> Number </th>
-								<th class="widthb30"> Customer <br /> Name </th>
-								<th class="widthb15"> Customer <br /> Region </th>
-								<th class="widthb25"> Sales <br /> Submitted </th>
+								<th> Customer Number </th>
+								<th> Customer Name </th>
+								<th> اسم الزبون  </th>
 							</tr>
-						</thead>
+						</thead> -->
+						<tbody>
+							<tr *ngFor="let customer of customersFilterData" (click)="fetchSelectedCustomer(customer)">
+								<td class="widthb20">
+									<span>
+										{{customer.CUST_NUMBER}}
+									</span>
+								</td>
+
+								<td class="widthb30">
+									<span>
+										{{customer.CUST_NAME}}
+									</span>
+								</td>
+
+								<td class="widthb15">
+									<span>
+										{{customer.REGION}}
+									</span>
+								</td>
+
+								<td class="widthb25">
+									<span>
+										{{ customer.SALES_SUBMITTED_DATETIME!=null ? moment(customer.SALES_SUBMITTED_DATETIME).format('MMM Do YYYY') : 'N/A' }}
+									</span>
+									<span class="db tc1">
+										{{ customer.SALES_SUBMITTED_DATETIME!=null ? moment(customer.SALES_SUBMITTED_DATETIME).format('h:mm a') : '' }}
+									</span>
+								</td>
+							</tr>
+						</tbody>
 					</table>
-
-					<div  class="widthb100" style="height: 230px; overflow: auto;">
-						<table class="widthb100 table-striped">
-							<!-- <thead>
-								<tr>
-									<th> Customer Number </th>
-									<th> Customer Name </th>
-									<th> اسم الزبون  </th>
-								</tr>
-							</thead> -->
-							<tbody>
-								<tr *ngFor="let customer of customersFilterData" (click)="fetchSelectedCustomer(customer)">
-									<td class="widthb20">
-										<span>
-											{{customer.CUST_NUMBER}}
-										</span>
-									</td>
-
-									<td class="widthb30">
-										<span>
-											{{customer.CUST_NAME}}
-										</span>
-									</td>
-
-									<td class="widthb15">
-										<span>
-											{{customer.REGION}}
-										</span>
-									</td>
-
-									<td class="widthb25">
-										<span>
-											{{moment(customer.SALES_SUBMITTED_DATETIME).format('MMM Do YYYY')}}
-										</span>
-										<span class="db tc1">
-											{{moment(customer.SALES_SUBMITTED_DATETIME).format('h:mm a')}}
-										</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<p class="mt1 tc3" *ngIf="customers_found_status"> No customers found for updation. </p>
-					</div>
+					<p class="mt1 tc3" *ngIf="customers_found_status"> No customers found for updation. </p>
 				</div>
+			</div>
 
-				<div class="p1 fl" style="width: 550px">
-					<!-- <ion-slides pager class="listing_slider">
-					  <ion-slide>
-					  	<div>
-					  		<img src="{{customer_info.images.BALADIYA_CERT_IMG}}" style="max-width: 100%;" />
-					  	</div>
-					  	<p>Baldiya Certificate</p>
-					  </ion-slide>
-				    
-				    <ion-slide>
-				    	<div>
-				  			<img src="{{customer_info.images.BR_CR_CERT_IMG}}" style="max-width: 100%;" />
-				    	</div>
-					  	<p>Branch Cr Certificate</p>
-				    </ion-slide>
-			      
-			      <ion-slide>
-			      	<div>
-			    			<img src="{{customer_info.images.MAIN_CR_CERT_IMG}}" style="max-width: 100%;" />
-			      	</div>
-					  	<p>Main Cr Certificate</p>
-			      </ion-slide>
-		        
-		        <ion-slide>
-		        	<div>
-		      			<img src="{{customer_info.images.NATIONAL_ADD_IMG}}" style="max-width: 100%;" />
-		        	</div>
-					  	<p>National Address Cr</p>	
-		        </ion-slide>
-	          
-	          <ion-slide>
-	          	<div>
-	        			<img src="{{customer_info.images.VAT_CERT_IMG}}" style="max-width: 100%;" />
-	          	</div>
-					  	<p>VAT Certificate</p>
-	          </ion-slide>
-            
-            <ion-slide>
-            	<div>
-          			<img src="{{customer_info.images.COC_CERT_IMG}}" style="max-width: 100%;" />
-            	</div>
-					  	<p>COC Certificate</p>
-            </ion-slide>
-					</ion-slides> -->
+			<div class="p1 fl" style="width: 550px">
+				<!-- <ion-slides pager class="listing_slider">
+					<ion-slide>
+					<div>
+						<img src="{{customer_info.images.BALADIYA_CERT_IMG}}" style="max-width: 100%;" />
+					</div>
+					<p>Baldiya Certificate</p>
+					</ion-slide>
+				
+				<ion-slide>
+					<div>
+						<img src="{{customer_info.images.BR_CR_CERT_IMG}}" style="max-width: 100%;" />
+					</div>
+					<p>Branch Cr Certificate</p>
+				</ion-slide>
+				
+				<ion-slide>
+				<div>
+						<img src="{{customer_info.images.MAIN_CR_CERT_IMG}}" style="max-width: 100%;" />
+				</div>
+					<p>Main Cr Certificate</p>
+				</ion-slide>
+			
+			<ion-slide>
+				<div>
+					<img src="{{customer_info.images.NATIONAL_ADD_IMG}}" style="max-width: 100%;" />
+				</div>
+					<p>National Address Cr</p>	
+			</ion-slide>
+			
+			<ion-slide>
+			<div>
+					<img src="{{customer_info.images.VAT_CERT_IMG}}" style="max-width: 100%;" />
+			</div>
+					<p>VAT Certificate</p>
+			</ion-slide>
+		
+		<ion-slide>
+			<div>
+				<img src="{{customer_info.images.COC_CERT_IMG}}" style="max-width: 100%;" />
+			</div>
+					<p>COC Certificate</p>
+		</ion-slide>
+				</ion-slides> -->
 
-					<div class="widthb100 listing_imgs">
-						<div>
-							<img [src]="sanitizer.bypassSecurityTrustResourceUrl(image_switcher.path)" style="width: 100%;" />
-						</div>
-						<p>{{image_switcher.title}}</p>
+				<div class="widthb100 listing_imgs">
+					<div>
+						<img [src]="sanitizer.bypassSecurityTrustResourceUrl(image_switcher.path)" style="width: 100%;" />
+					</div>
+					<p>{{image_switcher.title}}</p>
 
-						<div  *ngIf="selected_customer_images">
-							<a (click)="changeImgPrev()">Previous</a>
-							<a (click)="changeImgNext()">Next</a>
-						</div>
+					<div  *ngIf="selected_customer_images">
+						<a (click)="changeImgPrev()">Previous</a>
+						<a (click)="changeImgNext()">Next</a>
 					</div>
 				</div>
 			</div>
+		</div>
     </div>
   </div>
 </ion-content>

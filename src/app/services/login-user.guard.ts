@@ -16,12 +16,12 @@ export class LoginUserGuard implements CanActivate {
     state: RouterStateSnapshot) {
       
       let login_status = this.localStorageService.getItem('status_login'),
-      		user_info = this.localStorageService.getItem('user_info');
+      		user_data = this.localStorageService.getItem('user_info');
       // console.log(login_status);
 
       if (login_status=='1') {
         
-        if(user_info.USER_TYPE=='SALESPERSON'){
+        if(user_data.userInfo.USER_TYPE=='SALES'){
           this.router.navigate(["/home"]);
         }
         else{

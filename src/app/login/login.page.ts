@@ -74,10 +74,10 @@ export class LoginPage implements OnInit {
         this.localStorageService.setItem('status_login', '1');
 		   	this.localStorageService.setItem('user_info', res.data);
 
-        let user_type = res.data.USER_TYPE;
+        let user_type = res.data.userInfo.USER_TYPE;
 
         setTimeout(()=>{
-          if(user_type=='SALESPERSON'){
+          if(user_type=='SALES'){
             this.router.navigate(["/home"]);
           }
           else{

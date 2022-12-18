@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { QrScannerPageRoutingModule } from './qr-scanner-routing.module';
 import { QrScannerPage } from './qr-scanner.page';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
+//import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     FormsModule,
     IonicModule,
     QrScannerPageRoutingModule,
-    ZXingScannerModule
+  //  ZXingScannerModule
   ],
   declarations: [QrScannerPage]
 })

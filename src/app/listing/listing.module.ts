@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListingPageRoutingModule } from './listing-routing.module';
 import { ListingPage } from './listing.page';
 import { DataTablesModule } from "angular-datatables";
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   imports: [
